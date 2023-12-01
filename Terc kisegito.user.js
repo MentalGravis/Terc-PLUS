@@ -12,35 +12,31 @@
 // ==/UserScript==
 
 (function() {
+    jQuery(document).ready(function(){
 
-    var zNode = document.createElement ('div');
-    zNode.innerHTML = '<button id="myButton" type="button">'
-                    + 'For Pete\'s sake, don\'t click me!</button>'
-                    ;
-    zNode.setAttribute ('id', 'myContainer');
-    document.body.appendChild (zNode);
+        jQuery("#tu-header > div > div:nth-child(1) > img").hide();
+        //document.getElementById ("myButton").addEventListener ("click", run, false);
 
-    //--- Activate the newly added button.
-    document.getElementById ("myButton").addEventListener (
-        "click", run, false
-    );
 
+        jQuery("#tu-header > div > div:nth-child(1)").append("<button id=\"myButton\" type=\"button\">Teljes összeg</button>")
 
     //jQuery("span.x-panel-header-text").append("bruh");
 
-    var run = function(){
-        let anyagOssz = Number(document.querySelector("div#tea-igrid.x-panel.grid-fit.x-grid-panel").children[0].children[0].children[4].textContent.split("\xA0").join(""));
-        let dijOssz = Number(document.querySelector("div#tea-igrid.x-panel.grid-fit.x-grid-panel").children[0].children[0].children[6].textContent.split("\xA0").join(""));
+        var run = function(){
+            let anyagOssz = Number(document.querySelector("#tea-igrid > div:nth-child(1) > span:nth-child(1) > span:nth-child(5)").textContent.split("\xA0").join(""));
+            let dijOssz = Number(document.querySelector("#tea-igrid > div:nth-child(1) > span:nth-child(1) > span:nth-child(7)").textContent.split("\xA0").join(""));
 
-        let teljesOssz = anyagOssz + dijOssz;
+            let teljesOssz = anyagOssz + dijOssz;
 
-        let teljesOsszSzoveg = " | Teljes összeg: " + teljesOssz.toLocaleString() + " Ft";
+            let teljesOsszSzoveg = "<span>Teljes összeg: " + teljesOssz.toLocaleString() + " Ft<\span>";
 
 
-        jQuery("span.x-panel-header-text").append(teljesOsszSzoveg);
-    }
 
+            document.querySelector("#tea-igrid > div:nth-child(1) > span:nth-child(1) > span:nth-child(1)").outerHTML = teljesOsszSzoveg;
+        }
+        document.getElementById ("myButton").addEventListener ("click", run, false);
     //if (document.body.contains(jQuery("span.x-panel-header-text"))) {
     //    run
     //}
+    });
 })();
