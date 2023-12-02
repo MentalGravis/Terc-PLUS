@@ -36,3 +36,11 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 1. Most már telepítheted a Terc-PLUS szkriptet. Ehhez [kattints ide](https://github.com/MentalGravis/Terc-PLUS/releases/latest/download/Terc.PLUS.user.js).
 1. A megjelenő oldalon kattints az **Install** gombra.
 1. Lépj be a Terc-etalon-ba, és használd egészséggel.
+
+## Jelenleg ismert hibák
+
+Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot tenni, [itt megteheted](https://github.com/MentalGravis/Terc-PLUS/issues)
+
+- [ ] #2
+- [ ] #3
+- [ ] #4
