@@ -53,6 +53,7 @@
         }
 
         var buttonRearrangement = function(){
+
             if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
                 if ((jQuery('.tu-header-cont > div:nth-child(6)').is(':visible')) || (jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').is(':visible')) || (jQuery('#tu-header-login').is(':visible'))){
 
@@ -66,10 +67,10 @@
 
                 if(!document.querySelector('.tu-header-cont > div:nth-child(1)').innerHTML.includes('SZERKESZTÉS:')){
                     let leftMenu = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)');
-                    leftMenu.detach().appendTo('.tu-header-cont > div:nth-child(1)');
-                    if(!document.querySelector('td.x-toolbar-left:nth-child(2)').innerHTML.includes('SZERKESZTÉS:')){
-                        jQuery('td.x-toolbar-left:nth-child(2)').remove();
-                    }
+                    leftMenu.detach().prependTo('.tu-header-cont > div:nth-child(1)');
+                    // if(!document.querySelector('td.x-toolbar-left:nth-child(2)').innerHTML.includes('SZERKESZTÉS:')){
+                    //     jQuery('td.x-toolbar-left:nth-child(2)').remove();
+                    // }
                 }
 
                 if(!(jQuery('.tu-header-cont').css('position') == "relative")){    // relative position for title's parent element so title can go absolute
