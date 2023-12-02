@@ -11,6 +11,17 @@ Terc felhasználói felület javítása
 1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
 1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek
 
+## Képek
+
+**Minden menügombbal**<br>
+<picture>
+<img alt="Minden menügombbal" src="img/menu_with_buttons.png"><br>
+</picture>
+**Csak a Összesítők fedlapok és a Visszalépés gombokkal**<br>
+<picture>
+<img alt="Csak a Összesítők fedlapok és a Visszalépés gombokkal" src="img/menu_without_buttons.png">
+</picture>
+
 ## Telepítés
 
 A szkript a legtöbb modern böngészőre telepíthető.<br>
