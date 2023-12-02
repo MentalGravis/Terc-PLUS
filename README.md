@@ -41,6 +41,6 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 
 Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot tenni, [itt megteheted](https://github.com/MentalGravis/Terc-PLUS/issues)
 
-- [ ] #2
-- [ ] #3
-- [ ] #4
+- [ ] https://github.com/MentalGravis/Terc-PLUS/issues/2
+- [ ] https://github.com/MentalGravis/Terc-PLUS/issues/3
+- [ ] https://github.com/MentalGravis/Terc-PLUS/issues/4
