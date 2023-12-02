@@ -5,11 +5,11 @@ Terc felhasználói felület javítása
 
 ## Funkciók
 
-1. Az "Összes munkanem" szöveg helyén az ajánlat teljes ára található, amit az "Anyag összesen" és "Díj összesen" számok összeadásából számol ki
-1. A "SZERKESZTÉS:{adott projekt címe}" felkerül a fejlécbe
+1. Az *"Összes munkanem"* szöveg helyén az ajánlat teljes ára található, amit az *"Anyag összesen"* és *"Díj összesen"* számok összeadásából számol ki
+1. A *"SZERKESZTÉS:{adott projekt címe}"* felkerül a fejlécbe
 1. Az előbbi érdekében mind a Terc-etalon logó, mind a középső terc.hu-ra mutató hivatkozás, mind az email elrejtésre került
 1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
-1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az "Összesítők fedlapok" és a "Visszalépés" gombokon kívüli vezérlőelemek
+1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek
 
 ## Telepítés
 
