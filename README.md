@@ -41,6 +41,6 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 
 Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot tenni, [itt megteheted](https://github.com/MentalGravis/Terc-PLUS/issues)
 
-- [ ] https://github.com/MentalGravis/Terc-PLUS/issues/2
-- [ ] https://github.com/MentalGravis/Terc-PLUS/issues/3
-- [ ] https://github.com/MentalGravis/Terc-PLUS/issues/4
+- [ ] [Néha a menüsor gombaji furcsán jelennek meg, és a fejlécbe lógnak](https://github.com/MentalGravis/Terc-PLUS/issues/2)
+- [ ] [Néha több ajánlat megnyitása utána a címsor helye üresen megmarad, ami a fejléc szétcsúszásához vezet](https://github.com/MentalGravis/Terc-PLUS/issues/3)
+- [ ] [(Opcionális) Ajánlat teljes árának pénzneme fekete, míg a sorban a többi mértékegység kék](https://github.com/MentalGravis/Terc-PLUS/issues/4)
