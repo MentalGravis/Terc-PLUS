@@ -77,3 +77,4 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
             * gyakran több tétel összevonásra kerül
             * gyakran sok tétel egyesült ára jelenik meg, melyet érdemes szétosztani
 1. ["Fontos" label költségvetésre, ami alapján mindig első helyen jelenik meg](https://github.com/MentalGravis/Terc-PLUS/issues/12)
+1. [Saját adattár nem K tételét megpróbálja megtalálni öntételben](https://github.com/MentalGravis/Terc-PLUS/issues/13)
