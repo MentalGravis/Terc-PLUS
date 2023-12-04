@@ -17,9 +17,9 @@ Terc felhasználói felület javítása
 <picture>
 <img alt="Minden menügombbal" src="img/menu_with_buttons.png"><br>
 </picture>
-**Csak a Összesítők fedlapok és a Visszalépés gombokkal**<br>
+Csak az **Összesítők fedlapok** és a **Vissza** gombokkal<br>
 <picture>
-<img alt="Csak a Összesítők fedlapok és a Visszalépés gombokkal" src="img/menu_without_buttons.png">
+<img alt="Csak az Összesítők fedlapok és a Vissza gombokkal" src="img/menu_without_buttons.png">
 </picture>
 
 ## Telepítés
