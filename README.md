@@ -76,3 +76,4 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
             * gyakran a darabár és a munkadíj újraosztásra kerül
             * gyakran több tétel összevonásra kerül
             * gyakran sok tétel egyesült ára jelenik meg, melyet érdemes szétosztani
+1. ["Fontos" label költségvetésre, ami alapján mindig első helyen jelenik meg](https://github.com/MentalGravis/Terc-PLUS/issues/12)
