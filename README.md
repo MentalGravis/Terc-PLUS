@@ -47,20 +47,21 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
 
 # Lehetséges új funkciók
 
-1. Saját memóriába mentett TERC email kontaktok, melyeket mind küldésnél, mind fogadásnál naplóz, majd küldésnél egy legördülő listából lehet válogatni
+1. [Lebegő menü létrehozása, scriptbe épített featureök ezen keresztüli beállítása](https://github.com/MentalGravis/Terc-PLUS/issues/10)
+1. [Saját memóriába mentett TERC email kontaktok](https://github.com/MentalGravis/Terc-PLUS/issues/5), melyeket mind küldésnél, mind fogadásnál naplóz, majd küldésnél egy legördülő listából lehet válogatni
     * A fentebb említett menübe integrálás, oly módon, hogy beceneveket lehessen adott email-hez beállítani
     * Monkey saját memóriájának használata, Kulcs - Érték párok
-1. Tömeges export
+1. [Tömeges export](https://github.com/MentalGravis/Terc-PLUS/issues/6)
     * szokásos beállítások (legfeljebb nem a saját kinézetével)
     * exportra nyomás után a kijelölt elemeken egyesével végigiterál és kiexportálja a megadott beállításokkal
-1. "Tételek csoportosítása" ablak automatikus becsukása
-1. Right panel gombok elrejthető gombjai automatikusan legyenek elrejtve
-1. Beírható szorzó és alapösszeg, ami alapján meghatározza a célösszeget, illetve a teljes összeg aktuálisan ettől való eltérését
+1. ["Tételek csoportosítása" ablak automatikus becsukása](https://github.com/MentalGravis/Terc-PLUS/issues/7)
+1. [Right panel gombok elrejthető gombjai automatikusan legyenek elrejtve](https://github.com/MentalGravis/Terc-PLUS/issues/8)
+1. [Beírható szorzó és alapösszeg, ami alapján meghatározza a célösszeget, illetve a teljes összeg aktuálisan ettől való eltérését](https://github.com/MentalGravis/Terc-PLUS/issues/9)
     * Lebegő menü
         * Melyet gombbal lehet megjeleníteni, elrejteni
         * Benne pipával lehet engedélyezni, illetve nem engedélyezni, ami alapján eltünteti a célösszeget és az eltérést
     * Lehetőség nem csak szorzóra, de eredményszámításra is
-1. Segédszámítások tételekhez ablak
+1. [Segédszámítások tételekhez ablak](https://github.com/MentalGravis/Terc-PLUS/issues/11)
     * egy sor, mely a megadott alapösszeg, a beírt rezsióradíj, munkaidő és szorzó alapján kiszámolja az anyagköltséget
         * lehetőség műveletekre (szorzás, osztás, összeadás, kivonás) az alapösszeg cellában, ennek végösszege zárójelben jelenjen meg a cella alatt/mellett
             * gyakran a darabár és a munkadíj újraosztásra kerül
