@@ -47,22 +47,22 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
 
 # Lehetséges új funkciók
 
+1. Saját memóriába mentett TERC email kontaktok, melyeket mind küldésnél, mind fogadásnál naplóz, majd küldésnél egy legördülő listából lehet válogatni
+    * A fentebb említett menübe integrálás, oly módon, hogy beceneveket lehessen adott email-hez beállítani
+    * Monkey saját memóriájának használata, Kulcs - Érték párok
+1. Tömeges export
+    * szokásos beállítások (legfeljebb nem a saját kinézetével)
+    * exportra nyomás után a kijelölt elemeken egyesével végigiterál és kiexportálja a megadott beállításokkal
+1. "Tételek csoportosítása" ablak automatikus becsukása
+1. Right panel gombok elrejthető gombjai automatikusan legyenek elrejtve
 1. Beírható szorzó és alapösszeg, ami alapján meghatározza a célösszeget, illetve a teljes összeg aktuálisan ettől való eltérését
     * Lebegő menü
         * Melyet gombbal lehet megjeleníteni, elrejteni
         * Benne pipával lehet engedélyezni, illetve nem engedélyezni, ami alapján eltünteti a célösszeget és az eltérést
     * Lehetőség nem csak szorzóra, de eredményszámításra is
-1. "Tételek csoportosítása" ablak automatikus becsukása
-1. Right panel gombok elrejthető gombjai automatikusan legyenek elrejtve
-1. Saját memóriába mentett TERC email kontaktok, melyeket mind küldésnél, mind fogadásnál naplóz, majd küldésnél egy legördülő listából lehet válogatni
-    * A fentebb említett menübe integrálás, oly módon, hogy beceneveket lehessen adott email-hez beállítani
-    * Monkey saját memóriájának használata, Kulcs - Érték párok
 1. Segédszámítások tételekhez ablak
     * egy sor, mely a megadott alapösszeg, a beírt rezsióradíj, munkaidő és szorzó alapján kiszámolja az anyagköltséget
         * lehetőség műveletekre (szorzás, osztás, összeadás, kivonás) az alapösszeg cellában, ennek végösszege zárójelben jelenjen meg a cella alatt/mellett
             * gyakran a darabár és a munkadíj újraosztásra kerül
             * gyakran több tétel összevonásra kerül
             * gyakran sok tétel egyesült ára jelenik meg, melyet érdemes szétosztani
-1. Tömeges export
-    * szokásos beállítások (legfeljebb nem a saját kinézetével)
-    * exportra nyomás után a kijelölt elemeken egyesével végigiterál és kiexportálja a megadott beállításokkal
