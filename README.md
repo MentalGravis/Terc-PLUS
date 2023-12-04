@@ -3,7 +3,9 @@ Terc felhasználói felület javítása
 
 **!! Tapasztalatlan programozó fércmunkája, az esetleges hibákért felelősséget nem tudok vállalni !!**
 
-## Funkciók
+<br>
+
+# Funkciók
 
 1. Az *"Összes munkanem"* szöveg helyén az ajánlat teljes ára található, amit az *"Anyag összesen"* és *"Díj összesen"* számok összeadásából számol ki
 1. A *"SZERKESZTÉS:{adott projekt címe}"* felkerül a fejlécbe
@@ -11,18 +13,10 @@ Terc felhasználói felület javítása
 1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
 1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek
 
-## Képek
 
-**Minden menügombbal**<br>
-<picture>
-<img alt="Minden menügombbal" src="img/menu_with_buttons.png"><br>
-</picture>
-Csak az **Összesítők fedlapok** és a **Vissza** gombokkal<br>
-<picture>
-<img alt="Csak az Összesítők fedlapok és a Vissza gombokkal" src="img/menu_without_buttons.png">
-</picture>
+<br>
 
-## Telepítés
+# Telepítés
 
 A szkript a legtöbb modern böngészőre telepíthető.<br>
 
@@ -34,13 +28,31 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 1. A megjelenő oldalon kattints az **Install** gombra.
 1. Lépj be a Terc-etalon-ba, és használd egészséggel.
 
-## Jelenleg ismert hibák
+
+<br>
+
+# Képek
+
+**Minden menügombbal**<br>
+<picture>
+<img alt="Minden menügombbal" src="img/menu_with_buttons.png"><br>
+</picture>
+Csak az **Összesítők fedlapok** és a **Vissza** gombokkal<br>
+<picture>
+<img alt="Csak az Összesítők fedlapok és a Vissza gombokkal" src="img/menu_without_buttons.png">
+</picture>
+
+<br>
+
+# Jelenleg ismert hibák
 
 Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot tenni, [itt megteheted](https://github.com/MentalGravis/Terc-PLUS/issues)
 
 - [ ] [Néha a menüsor gombaji furcsán jelennek meg, és a fejlécbe lógnak](https://github.com/MentalGravis/Terc-PLUS/issues/2)
 - [ ] [Néha több ajánlat megnyitása utána a címsor helye üresen megmarad, ami a fejléc szétcsúszásához vezet](https://github.com/MentalGravis/Terc-PLUS/issues/3)
 - [ ] [(Opcionális) Ajánlat teljes árának pénzneme fekete, míg a sorban a többi mértékegység kék](https://github.com/MentalGravis/Terc-PLUS/issues/4)
+
+<br>
 
 # Lehetséges új funkciók
 
