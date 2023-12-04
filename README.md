@@ -63,3 +63,6 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
             * gyakran a darabár és a munkadíj újraosztásra kerül
             * gyakran több tétel összevonásra kerül
             * gyakran sok tétel egyesült ára jelenik meg, melyet érdemes szétosztani
+1. Tömeges export
+    * szokásos beállítások (legfeljebb nem a saját kinézetével)
+    * exportra nyomás után a kijelölt elemeken egyesével végigiterál és kiexportálja a megadott beállításokkal
