@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         Terc kisegito
+// @name         Terc PLUS
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Kiírja a teljes összeget mindig, nem kell kikattintani
-// @author       You
+// @version      2.1
+// @description  Különböző funkciókkal bővíti a TERC-ETALON webalkalmazást
+// @author       Mental Gravis
 // @match        https://www.etalon.terc.hu/browser
 // @run-at       document-end
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=terc.hu
