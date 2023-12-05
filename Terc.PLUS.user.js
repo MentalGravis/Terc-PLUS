@@ -161,13 +161,13 @@
                 };
             }
 
-            console.log("lastPage: " + lastPage + "  ||  currentPage: " + currentPage);
+            //console.log("lastPage: " + lastPage + "  ||  currentPage: " + currentPage);
             lastPage = currentPage;
 
 
         }
 
-        setInterval(freshPage, 2000)
+        setInterval(freshPage, 2000);
 
 
     });
