@@ -11,8 +11,8 @@ Terc felhasználói felület javítása
 1. A *"SZERKESZTÉS:{adott projekt címe}"* felkerül a fejlécbe
 1. Az előbbi érdekében mind a Terc-etalon logó, mind a középső terc.hu-ra mutató hivatkozás, mind az email elrejtésre került
 1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
-1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek
-
+1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek (alapból elrejtve)
+1. *"Tételek csoportosítása"* ablak automatikus becsukása
 
 <br>
 
@@ -48,9 +48,9 @@ Csak az **Összesítők fedlapok** és a **Vissza** gombokkal<br>
 
 Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot tenni, [itt megteheted](https://github.com/MentalGravis/Terc-PLUS/issues)
 
-- [ ] [Néha a menüsor gombaji furcsán jelennek meg, és a fejlécbe lógnak](https://github.com/MentalGravis/Terc-PLUS/issues/2)
-- [ ] [Néha több ajánlat megnyitása utána a címsor helye üresen megmarad, ami a fejléc szétcsúszásához vezet](https://github.com/MentalGravis/Terc-PLUS/issues/3)
-- [ ] [(Opcionális) Ajánlat teljes árának pénzneme fekete, míg a sorban a többi mértékegység kék](https://github.com/MentalGravis/Terc-PLUS/issues/4)
+- [x] [~~Néha a menüsor gombaji furcsán jelennek meg, és a fejlécbe lógnak~~](https://github.com/MentalGravis/Terc-PLUS/issues/2)
+- [x] [~~Néha több ajánlat megnyitása utána a címsor helye üresen megmarad, ami a fejléc szétcsúszásához vezet~~](https://github.com/MentalGravis/Terc-PLUS/issues/3)
+- [x] [~~(Opcionális) Ajánlat teljes árának pénzneme fekete, míg a sorban a többi mértékegység kék~~](https://github.com/MentalGravis/Terc-PLUS/issues/4)
 
 <br>
 
@@ -63,8 +63,6 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
 1. [Tömeges export](https://github.com/MentalGravis/Terc-PLUS/issues/6)
     * szokásos beállítások (legfeljebb nem a saját kinézetével)
     * exportra nyomás után a kijelölt elemeken egyesével végigiterál és kiexportálja a megadott beállításokkal
-1. ["Tételek csoportosítása" ablak automatikus becsukása](https://github.com/MentalGravis/Terc-PLUS/issues/7)
-1. [Right panel gombok elrejthető gombjai automatikusan legyenek elrejtve](https://github.com/MentalGravis/Terc-PLUS/issues/8)
 1. [Beírható szorzó és alapösszeg, ami alapján meghatározza a célösszeget, illetve a teljes összeg aktuálisan ettől való eltérését](https://github.com/MentalGravis/Terc-PLUS/issues/9)
     * Lebegő menü
         * Melyet gombbal lehet megjeleníteni, elrejteni
