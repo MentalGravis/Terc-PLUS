@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         Terc PLUS
 // @namespace    http://tampermonkey.net/
-// @version      2.1
+// @version      2.21
 // @description  Különböző funkciókkal bővíti a TERC-ETALON webalkalmazást
 // @author       Mental Gravis
 // @match        https://www.etalon.terc.hu/browser
 // @run-at       document-end
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=terc.hu
 // @require      https://code.jquery.com/jquery-3.6.4.min.js#sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=
+// @updateURL    https://github.com/MentalGravis/Terc-PLUS/releases/latest/download/Terc.PLUS.user.js
 // @grant        none
 // ==/UserScript==
 
