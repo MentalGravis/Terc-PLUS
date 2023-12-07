@@ -123,7 +123,46 @@
 
         /*<------------------------------------------------------------------------------------------------------------------------------>*/
 
+        var massExportButton = document.createElement("Button");
+        massExportButton.innerHTML = "Kijelölt ajánlatok exportja";
+        massExportButton.style = "top:0;left:0;position:absolute;z-index: 9999"
+        massExportButton.body.appendChild(button);
 
+        var massExport = function () {
+            let ajanlatokLista = "#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div";
+
+            var downArrow = jQuery.Event("keydown");
+            downArrow.which = downArrow.keyCode = 40; // # Some key code value
+
+            var enterButton = jQuery.Event("enter");
+            downArrow.which = downArrow.keyCode = 13;
+            // e.keyCode = 50;
+            // $("input").trigger(e);
+
+            jQuery(ajanlatokLista).each(function(index){
+                if (jQuery(this).className.includes("selected")){
+
+                    let konkretAjanlat = ajanlatokLista + ":nth-child(" + (index+1).toString() + ") > table > tbody > tr > td:nth-child(4) > div > div> div > input";
+
+                    let exportOption = "";
+
+                    jQuery(konkretAjanlat).click().trigger(downArrow).trigger(downArrow)
+                
+                    jQuery("body > div").each(function(index){
+                        if(jQuery(this).attr('class').includes("x-combo-list")){
+                            console.log(index)
+                        }
+                    });
+
+                }
+            });
+        }
+
+
+
+
+
+        /*<------------------------------------------------------------------------------------------------------------------------------>*/
         var currentPage = "";
         var lastPage = "";
 
