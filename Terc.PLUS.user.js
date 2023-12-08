@@ -143,16 +143,17 @@
                 if (jQuery(this).className.includes("selected")){
 
                     let konkretAjanlat = ajanlatokLista + ":nth-child(" + (index+1).toString() + ") > table > tbody > tr > td:nth-child(4) > div > div> div > input";
+                    
+                    jQuery(konkretAjanlat).click();                 // click on selected's Nyomtatás                 
+                    jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-last-child(1)").click(); // list 3rd element: "export" clicked
+                    
+                    let exportTagolas = "body > div:nth-last-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > input";
+                    jQuery(exportTagolas).click(); // export window tagolás clicked
 
-                    let exportOption = "";
-
-                    jQuery(konkretAjanlat).click().trigger(downArrow).trigger(downArrow)
-                
-                    jQuery("body > div").each(function(index){
-                        if(jQuery(this).attr('class').includes("x-combo-list")){
-                            console.log(index)
-                        }
-                    });
+                    jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-child(1)").click(); // folyamatos tagolás kiválasztva
+                    
+                    let exportFinish = "body > div:nth-last-child(4) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
+                    jQuery(exportFinish).click()
 
                 }
             });
@@ -163,6 +164,8 @@
 
 
         /*<------------------------------------------------------------------------------------------------------------------------------>*/
+ 
+
         var currentPage = "";
         var lastPage = "";
 
