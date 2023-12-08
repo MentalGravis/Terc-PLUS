@@ -131,31 +131,50 @@
         var massExport = function () {
             let ajanlatokLista = "#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div";
 
-            var downArrow = jQuery.Event("keydown");
-            downArrow.which = downArrow.keyCode = 40; // # Some key code value
+            const indexOfSelected = [];
 
-            var enterButton = jQuery.Event("enter");
-            downArrow.which = downArrow.keyCode = 13;
-            // e.keyCode = 50;
-            // $("input").trigger(e);
-
-            jQuery(ajanlatokLista).each(function(index){
-                if (jQuery(this).className.includes("selected")){
-
-                    let konkretAjanlat = ajanlatokLista + ":nth-child(" + (index+1).toString() + ") > table > tbody > tr > td:nth-child(4) > div > div> div > input";
-                    
-                    jQuery(konkretAjanlat).click();                 // click on selected's Nyomtatás                 
-                    jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-last-child(1)").click(); // list 3rd element: "export" clicked
-                    
-                    let exportTagolas = "body > div:nth-last-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > input";
-                    jQuery(exportTagolas).click(); // export window tagolás clicked
-
-                    jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-child(1)").click(); // folyamatos tagolás kiválasztva
-                    
-                    let exportFinish = "body > div:nth-last-child(4) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
-                    jQuery(exportFinish).click()
-
+            document.querySelectorAll(ajanlatokLista).forEach((element, index) => {
+                if(element.className.includes("selected")){
+                    indexOfSelected.push(index);
+                    jQuery(element).toggleClass("x-grid3-row-selected x-grid3-row-alt")                 // deselect selected items, after noting them
                 }
+            });
+            
+            indexOfSelected.forEach((element) => {
+                
+                let konkretAjanlat = ajanlatokLista + ":nth-child(" + (element+1).toString() + ") > table > tbody > tr > td:nth-child(4) > div > div> div > input";
+
+                let konkretAjanlatOuter = ajanlatokLista + ":nth-child(" + (element+1).toString() + ")";
+                jQuery(konkretAjanlatOuter).toggleClass("x-grid3-row-alt x-grid3-row-selected"); // select the item
+
+                let topExportButton = '#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > table > tbody > tr > td> table > tbody > tr > td:nth-child(13)  > table > tbody > tr:nth-child(2) > td:nth-child(2) > em > button';
+                
+                setTimeout(() => {
+                    jQuery(topExportButton).click(); // click on export on top
+                }, 50)
+                
+                let indexOfExport = "";
+                document.querySelectorAll('body > div').forEach((element, index) => {
+                    if((element.className.includes("x-window x-window-plain")) && (element.style.visibility == 'visible')){
+                        indexOfExport = index.toString()
+                    }
+                });
+
+                let exportTagolas = "body > div:nth-child("+ indexOfExport +") > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > input";
+                setTimeout(() => {
+                    jQuery(exportTagolas).click(); // export window tagolás clicked
+                }, 500);
+
+                setTimeout(() => {
+                    jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-child(1)").click(); // folyamatos tagolás kiválasztva
+                }, 1000);
+                
+                
+                let exportFinish = "body > div:nth-last-child(4) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
+                setTimeout(() => {
+                    jQuery(exportFinish).click()
+                }, 1000);
+
             });
         }
 
