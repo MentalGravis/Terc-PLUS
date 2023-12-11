@@ -19,6 +19,8 @@
 
         //jQuery("#tu-header > div > div:nth-child(1)").append("<button id=\"myButton\" type=\"button\">Teljes összeg</button>")
 
+/*<---------------------------------- SUM OF MONEY ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
+
         var run = function(){
             if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
 
@@ -38,7 +40,7 @@
 
         setInterval(run, 1000)
 
-/*<-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
+/*<---------------------------------- TOGGLE BUTTONS ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
 
         var button = document.createElement("Button");
         button.innerHTML = "Menüsor";
@@ -121,12 +123,22 @@
 
         setInterval(buttonRearrangement, 1000);
 
-        /*<------------------------------------------------------------------------------------------------------------------------------>*/
+        /*<---------------------------------------------- MASS EXPORT -------------------------------------------------------------------------------->*/
 
-        var massExportButton = document.createElement("Button");
-        massExportButton.innerHTML = "Kijelölt ajánlatok exportja";
-        massExportButton.style = "top:0;left:0;position:absolute;z-index: 9999"
-        massExportButton.body.appendChild(button);
+        const massExportButton = document.createElement('button');
+        massExportButton.textContent = 'Export Mind';
+
+        // Set button styles
+        massExportButton.style.position = 'absolute';
+        massExportButton.style.top = '0px';
+        massExportButton.style.left = '72px';
+        massExportButton.style.zIndex = '9999';        
+
+        // Append the button to the body of the document
+        document.body.appendChild(massExportButton);
+
+
+
 
         var massExport = function () {
             let ajanlatokLista = "#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div";
@@ -151,9 +163,9 @@
                 
                 setTimeout(() => {
                     jQuery(topExportButton).click(); // click on export on top
-                }, 50)
+                }, 300)
                 
-                let indexOfExport = "";
+                let indexOfExport = "";                         // searching where the export window is, as it gets appended within body, doesnt have a stable position
                 document.querySelectorAll('body > div').forEach((element, index) => {
                     if((element.className.includes("x-window x-window-plain")) && (element.style.visibility == 'visible')){
                         indexOfExport = index.toString()
@@ -163,26 +175,32 @@
                 let exportTagolas = "body > div:nth-child("+ indexOfExport +") > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > input";
                 setTimeout(() => {
                     jQuery(exportTagolas).click(); // export window tagolás clicked
-                }, 500);
+                }, 300);
+
 
                 setTimeout(() => {
                     jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-child(1)").click(); // folyamatos tagolás kiválasztva
-                }, 1000);
+                }, 300);
                 
+                document.querySelectorAll('body > div').forEach((element, index) => {           // searching for export window again, as after opening Tagolás window the list remains and hidden, meaning the body changes
+                    if((element.className.includes("x-window x-window-plain")) && (element.style.visibility == 'visible')){
+                        indexOfExport = index.toString()
+                    }
+                });
                 
-                let exportFinish = "body > div:nth-last-child(4) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
+                let exportFinish = "body > div:nth-child("+ indexOfExport + ") > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
                 setTimeout(() => {
                     jQuery(exportFinish).click()
-                }, 1000);
+                }, 300);
 
             });
         }
 
+        massExportButton.addEventListener('click', massExport);
 
 
 
-
-        /*<------------------------------------------------------------------------------------------------------------------------------>*/
+        /*<---------------------------------------- HIDE ON OPEN -------------------------------------------------------------------------------------->*/
  
 
         var currentPage = "";
