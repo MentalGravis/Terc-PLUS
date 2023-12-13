@@ -125,6 +125,8 @@
 
         /*<---------------------------------------------- MASS EXPORT -------------------------------------------------------------------------------->*/
 
+        // https://jsfiddle.net/qHL8Z/3/
+
         const massExportButton = document.createElement('button');
         massExportButton.textContent = 'Export Mind';
 
@@ -148,52 +150,78 @@
             document.querySelectorAll(ajanlatokLista).forEach((element, index) => {
                 if(element.className.includes("selected")){
                     indexOfSelected.push(index);
-                    jQuery(element).toggleClass("x-grid3-row-selected x-grid3-row-alt")                 // deselect selected items, after noting them
+                    jQuery(element).toggleClass("x-grid3-row-selected")                 // deselect selected items, after noting them
                 }
             });
-            
-            indexOfSelected.forEach((element) => {
-                
-                let konkretAjanlat = ajanlatokLista + ":nth-child(" + (element+1).toString() + ") > table > tbody > tr > td:nth-child(4) > div > div> div > input";
 
-                let konkretAjanlatOuter = ajanlatokLista + ":nth-child(" + (element+1).toString() + ")";
-                jQuery(konkretAjanlatOuter).toggleClass("x-grid3-row-alt x-grid3-row-selected"); // select the item
+            for (let i=1;i<(indexOfSelected.length+1);i++) {
+                
+                //  let konkretAjanlat = ajanlatokLista + ":nth-child(" + (indexOfSelected[i]+1).toString() + ") > table > tbody > tr > td:nth-child(4) > div > div> div > input";
+
+                let konkretAjanlatOuter = ajanlatokLista + ":nth-child(" + (indexOfSelected[i]).toString() + ")";
+
+                setTimeout(() => {                    
+                    jQuery(konkretAjanlatOuter.toString()).toggleClass("x-grid3-row-selected"); // select the item
+                }, i*500);
 
                 let topExportButton = '#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > table > tbody > tr > td> table > tbody > tr > td:nth-child(13)  > table > tbody > tr:nth-child(2) > td:nth-child(2) > em > button';
                 
-                setTimeout(() => {
-                    jQuery(topExportButton).click(); // click on export on top
-                }, 300)
+                //setTimeout(() => {
+                    jQuery(topExportButton.toString()).click(); // click on export on top
+                //}, 1000)
                 
-                let indexOfExport = "";                         // searching where the export window is, as it gets appended within body, doesnt have a stable position
-                document.querySelectorAll('body > div').forEach((element, index) => {
-                    if((element.className.includes("x-window x-window-plain")) && (element.style.visibility == 'visible')){
-                        indexOfExport = index.toString()
-                    }
-                });
 
-                let exportTagolas = "body > div:nth-child("+ indexOfExport +") > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > input";
+
+                
                 setTimeout(() => {
+                    let indexOfExport = "";                         // searching where the export window is, as it gets appended within body, doesnt have a stable position
+                    //setTimeout(() => {
+                    jQuery('body').children().each(function(index){
+                        if ((jQuery(this).text()).toString().includes('Export beállítások')) {
+                            indexOfExport = (index+1).toString();
+                        }
+                    });
+                    //}, 1000);
+
+                    
+                    // jQuery('body').children().each(function(index){
+                    //     if ((jQuery(this).text()).toString().includes('Export beállítások')) {
+                    //         indexOfExport = index.toString();
+                    //     }
+                    // });
+
+                    let exportTagolas = "body > div:nth-child("+ indexOfExport +") > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > input";
+                
                     jQuery(exportTagolas).click(); // export window tagolás clicked
-                }, 300);
+                }, 500);
 
 
                 setTimeout(() => {
                     jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-child(1)").click(); // folyamatos tagolás kiválasztva
-                }, 300);
+                }, i*501);
                 
-                document.querySelectorAll('body > div').forEach((element, index) => {           // searching for export window again, as after opening Tagolás window the list remains and hidden, meaning the body changes
-                    if((element.className.includes("x-window x-window-plain")) && (element.style.visibility == 'visible')){
-                        indexOfExport = index.toString()
-                    }
-                });
-                
-                let exportFinish = "body > div:nth-child("+ indexOfExport + ") > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
                 setTimeout(() => {
-                    jQuery(exportFinish).click()
-                }, 300);
+                    
+                    let indexOfExport = "";                         // searching where the export window is, as it gets appended within body, doesnt have a stable position
 
-            });
+                    jQuery('body').children().each(function(index){
+                        if ((jQuery(this).text()).toString().includes('Export beállítások')) {
+                            indexOfExport = (index+1).toString();
+                        }
+                    });
+
+                    let exportFinish = "body > div:nth-child("+ indexOfExport + ") > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
+                
+                    jQuery(exportFinish).click();
+
+                }, i*502);
+
+                
+                setTimeout(() => {                    
+                    jQuery(konkretAjanlatOuter).toggleClass("x-grid3-row-selected"); // turn off
+                }, i*503);
+
+            };
         }
 
         massExportButton.addEventListener('click', massExport);
