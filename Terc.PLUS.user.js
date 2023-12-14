@@ -103,9 +103,10 @@
 
         // Set button styles
         massExportButton.style.position = 'absolute';
-        massExportButton.style.top = '0px';
-        massExportButton.style.left = '0px';
-        massExportButton.style.zIndex = '9999';        
+        massExportButton.style.top = '79px';
+        massExportButton.style.left = '606px';
+        massExportButton.style.zIndex = '9999';
+        massExportButton.title = "Minden kijelölt elem exportálása"
 
         // Append the button to the body of the document
         document.body.appendChild(massExportButton);
@@ -172,6 +173,9 @@
             if ((lastPage == "") && (currentPage == "frontPage")){
                 massExportButton.style.visibility = "visible";
                 button.style.visibility = "hidden";
+
+                jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
+                jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
             }
 
             if ((lastPage == "frontPage") && (currentPage == "innerPage")){             // kívülről befele váltás
@@ -201,11 +205,17 @@
                 massExportButton.style.visibility = "hidden";
                 button.style.visibility = "visible";
 
+                jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
+                jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
+
             }
             if ((lastPage == "innerPage") && (currentPage == "frontPage")) {            // belülről kifele váltás
                 clearInterval(szumInterval);
                 massExportButton.style.visibility = "visible";
                 button.style.visibility = "hidden";
+
+                jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
+                jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
             }
 
             //console.log("lastPage: " + lastPage + "  ||  currentPage: " + currentPage);
@@ -214,7 +224,7 @@
 
         }
 
-        setInterval(freshPage, 2000);
+        setInterval(freshPage, 1000);
 
 
     });
