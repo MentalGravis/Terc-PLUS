@@ -15,13 +15,9 @@
 (function() {
     jQuery(document).ready(function(){
 
-        //jQuery("#tu-header > div > div:nth-child(1) > img").hide();
-
-        //jQuery("#tu-header > div > div:nth-child(1)").append("<button id=\"myButton\" type=\"button\">Teljes összeg</button>")
-
 /*<---------------------------------- SUM OF MONEY ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
 
-        var run = function(){
+        var szumOfAll = function(){
             if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
 
                 if (jQuery("#tea-igrid > div:nth-child(1) > span:nth-child(1) > span:nth-child(1)").text().search("Összes munkanem") >= 0) {
@@ -38,7 +34,7 @@
             }
         }
 
-        setInterval(run, 1000)
+        var szumInterval = setInterval(szumOfAll, 500);
 
 /*<---------------------------------- TOGGLE BUTTONS ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
 
@@ -46,14 +42,6 @@
         button.innerHTML = "Menüsor";
         button.style = "top:0;left:0;position:absolute;z-index: 9999"
         document.body.appendChild(button);
-
-
-
-        // if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
-
-        //     let rightMenuRow = document.querySelectorAll('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td');
-
-        // }
 
         var buttonRearrangement = function(){
 
@@ -66,14 +54,9 @@
 
                 }
 
-                //let topLeftIconspace = document.querySelector('.tu-header-cont > div:nth-child(1)');
-
                 if(!document.querySelector('.tu-header-cont > div:nth-child(1)').innerHTML.includes('SZERKESZTÉS:')){
                     let leftMenu = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)');
                     leftMenu.detach().prependTo('.tu-header-cont > div:nth-child(1)');
-                    // if(!document.querySelector('td.x-toolbar-left:nth-child(2)').innerHTML.includes('SZERKESZTÉS:')){
-                    //     jQuery('td.x-toolbar-left:nth-child(2)').remove();
-                    // }
                 }
 
                 if(!(jQuery('.tu-header-cont').css('position') == "relative")){    // relative position for title's parent element so title can go absolute
@@ -95,8 +78,6 @@
             return '#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(' + num + ')';
         }
 
-                //jQuery(rightMenuRow(0).toString()).hide();
-
         jQuery("button").click(function () {
 
             jQuery(rightMenuRow(1).toString()).toggle();
@@ -110,22 +91,12 @@
             jQuery(rightMenuRow(11).toString()).toggle();
             jQuery(rightMenuRow(12).toString()).toggle();
 
-            // for (let i = 1; i <= 13; i++) {
-            //     if((i==7) || (i==8) || (i==13)){
-            //         if(jQuery(rightMenuRow(i).toString()).is(':visible')){
-            //             jQuery(rightMenuRow(i).toString()).show()
-            //         }
-            //     }else{
-            //         jQuery(rightMenuRow(i).toString()).toggle();
-            //     }
-            // }
         });
 
         setInterval(buttonRearrangement, 1000);
 
         /*<---------------------------------------------- MASS EXPORT -------------------------------------------------------------------------------->*/
 
-        // https://jsfiddle.net/qHL8Z/3/
 
         const massExportButton = document.createElement('button');
         massExportButton.textContent = 'Export Mind';
@@ -133,95 +104,47 @@
         // Set button styles
         massExportButton.style.position = 'absolute';
         massExportButton.style.top = '0px';
-        massExportButton.style.left = '72px';
+        massExportButton.style.left = '0px';
         massExportButton.style.zIndex = '9999';        
 
         // Append the button to the body of the document
         document.body.appendChild(massExportButton);
 
-
-
-
         var massExport = function () {
             let ajanlatokLista = "#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div";
 
-            const indexOfSelected = [];
+            const selectedAjanlatIndex = [];
+            const selectedAjanlatLink = [];
 
-            document.querySelectorAll(ajanlatokLista).forEach((element, index) => {
+            document.querySelectorAll(ajanlatokLista).forEach((element, index) => {         // note selected items
                 if(element.className.includes("selected")){
-                    indexOfSelected.push(index);
-                    jQuery(element).toggleClass("x-grid3-row-selected")                 // deselect selected items, after noting them
+                    selectedAjanlatIndex.push(index);
+
+                    selectedAjanlatIDLookup = (ajanlatokLista + ":nth-child(" + (index+1) + ")" + "> table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(4) > div:nth-child(1) > a").toString();
+                
+                    selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
+
+                    selectedAjanlatLink.push("https://www.etalon.terc.hu/file/dl/" + selectedAjanlatID + "/PDF/2/1/1/1/2/HUF/1/1/1/1/1/2/1/");
+                    
+                    //window.open(selectedAjanlatLink);
                 }
             });
 
-            for (let i=1;i<(indexOfSelected.length+1);i++) {
-                
-                //  let konkretAjanlat = ajanlatokLista + ":nth-child(" + (indexOfSelected[i]+1).toString() + ") > table > tbody > tr > td:nth-child(4) > div > div> div > input";
+            var interval = setInterval(download, 300, selectedAjanlatLink);
 
-                let konkretAjanlatOuter = ajanlatokLista + ":nth-child(" + (indexOfSelected[i]).toString() + ")";
+            function download(urls) {
+                var url = urls.pop();
 
-                setTimeout(() => {                    
-                    jQuery(konkretAjanlatOuter.toString()).toggleClass("x-grid3-row-selected"); // select the item
-                }, i*500);
+                var a = document.createElement("a");
+                a.setAttribute('href', url);
+                a.setAttribute('download', '');
+                a.setAttribute('target', '_blank');
+                a.click();
 
-                let topExportButton = '#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > table > tbody > tr > td> table > tbody > tr > td:nth-child(13)  > table > tbody > tr:nth-child(2) > td:nth-child(2) > em > button';
-                
-                //setTimeout(() => {
-                    jQuery(topExportButton.toString()).click(); // click on export on top
-                //}, 1000)
-                
-
-
-                
-                setTimeout(() => {
-                    let indexOfExport = "";                         // searching where the export window is, as it gets appended within body, doesnt have a stable position
-                    //setTimeout(() => {
-                    jQuery('body').children().each(function(index){
-                        if ((jQuery(this).text()).toString().includes('Export beállítások')) {
-                            indexOfExport = (index+1).toString();
-                        }
-                    });
-                    //}, 1000);
-
-                    
-                    // jQuery('body').children().each(function(index){
-                    //     if ((jQuery(this).text()).toString().includes('Export beállítások')) {
-                    //         indexOfExport = index.toString();
-                    //     }
-                    // });
-
-                    let exportTagolas = "body > div:nth-child("+ indexOfExport +") > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > input";
-                
-                    jQuery(exportTagolas).click(); // export window tagolás clicked
-                }, 500);
-
-
-                setTimeout(() => {
-                    jQuery("body > div:nth-last-child(1) > div:nth-child(1) > div:nth-child(1)").click(); // folyamatos tagolás kiválasztva
-                }, i*501);
-                
-                setTimeout(() => {
-                    
-                    let indexOfExport = "";                         // searching where the export window is, as it gets appended within body, doesnt have a stable position
-
-                    jQuery('body').children().each(function(index){
-                        if ((jQuery(this).text()).toString().includes('Export beállítások')) {
-                            indexOfExport = (index+1).toString();
-                        }
-                    });
-
-                    let exportFinish = "body > div:nth-child("+ indexOfExport + ") > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1)  > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > button";
-                
-                    jQuery(exportFinish).click();
-
-                }, i*502);
-
-                
-                setTimeout(() => {                    
-                    jQuery(konkretAjanlatOuter).toggleClass("x-grid3-row-selected"); // turn off
-                }, i*503);
-
-            };
+                if (urls.length == 0) {
+                    clearInterval(interval);
+                }
+            }
         }
 
         massExportButton.addEventListener('click', massExport);
@@ -246,7 +169,12 @@
                 currentPage = "innerPage";
             }
 
-            if ((lastPage == "frontPage") && (currentPage == "innerPage")){
+            if ((lastPage == "") && (currentPage == "frontPage")){
+                massExportButton.style.visibility = "visible";
+                button.style.visibility = "hidden";
+            }
+
+            if ((lastPage == "frontPage") && (currentPage == "innerPage")){             // kívülről befele váltás
                 if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible')) && jQuery(rightMenuRow(6).toString()).is(':visible')){
                     jQuery(rightMenuRow(1).toString()).hide();
                     jQuery(rightMenuRow(2).toString()).hide();
@@ -267,6 +195,17 @@
                     jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)').click();
 
                 };
+
+                szumInterval
+
+                massExportButton.style.visibility = "hidden";
+                button.style.visibility = "visible";
+
+            }
+            if ((lastPage == "innerPage") && (currentPage == "frontPage")) {            // belülről kifele váltás
+                clearInterval(szumInterval);
+                massExportButton.style.visibility = "visible";
+                button.style.visibility = "hidden";
             }
 
             //console.log("lastPage: " + lastPage + "  ||  currentPage: " + currentPage);
