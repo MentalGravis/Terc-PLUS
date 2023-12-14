@@ -13,6 +13,7 @@ Terc felhasználói felület javítása
 1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
 1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek (alapból elrejtve)
 1. *"Tételek csoportosítása"* ablak automatikus becsukása
+1. Tömeges export: *"Export mind"* gomb megnyomása után minden kijelölt elemet exportál (folyamatos beállításon)
 
 <br>
 
@@ -60,9 +61,6 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
 1. [Saját memóriába mentett TERC email kontaktok](https://github.com/MentalGravis/Terc-PLUS/issues/5), melyeket mind küldésnél, mind fogadásnál naplóz, majd küldésnél egy legördülő listából lehet válogatni
     * A fentebb említett menübe integrálás, oly módon, hogy beceneveket lehessen adott email-hez beállítani
     * Monkey saját memóriájának használata, Kulcs - Érték párok
-1. [Tömeges export](https://github.com/MentalGravis/Terc-PLUS/issues/6)
-    * szokásos beállítások (legfeljebb nem a saját kinézetével)
-    * exportra nyomás után a kijelölt elemeken egyesével végigiterál és kiexportálja a megadott beállításokkal
 1. [Beírható szorzó és alapösszeg, ami alapján meghatározza a célösszeget, illetve a teljes összeg aktuálisan ettől való eltérését](https://github.com/MentalGravis/Terc-PLUS/issues/9)
     * Lebegő menü
         * Melyet gombbal lehet megjeleníteni, elrejteni
