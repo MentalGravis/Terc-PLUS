@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Terc PLUS
 // @namespace    http://tampermonkey.net/
-// @version      2.21
+// @version      2.3
 // @description  Különböző funkciókkal bővíti a TERC-ETALON webalkalmazást
 // @author       Mental Gravis
 // @match        https://www.etalon.terc.hu/browser
