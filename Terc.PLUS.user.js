@@ -105,13 +105,21 @@
 
 
         const massExportButton = document.createElement('button');
-        massExportButton.textContent = 'Export Mind';
+        massExportButton.textContent = 'Export All';
 
         // Set button styles
         massExportButton.style.position = 'relative';
-        massExportButton.style.left = '260px';
+        massExportButton.style.left = '276px';
         massExportButton.style.zIndex = "9999";
-        massExportButton.title = "Minden kijelölt elem exportálása"
+        massExportButton.style.cursor = "pointer";
+        massExportButton.style.fontSize = "11px";
+        massExportButton.style.background = "transparent";
+        massExportButton.style.padding = "4px 8px";
+        massExportButton.style.border = "none";
+        massExportButton.style.fontFamily = "arial, tahoma, verdana, helvetica";
+        massExportButton.style.color = "#333";
+        massExportButton.style.transition = 'background-color 0s ease-in-out';
+        massExportButton.title = "Minden kijelölt elem exportálása";
 
         // Append the button to the body of the document
         let topKoltsKez = document.querySelector('#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)');
@@ -154,6 +162,25 @@
             }
         }
 
+        massExportButton.addEventListener('mouseover', function(){
+            massExportButton.style.backgroundColor = "#dcefff";
+            massExportButton.style.textDecoration = "underline";
+        });
+
+        massExportButton.addEventListener('mouseout', function() {
+            massExportButton.style.backgroundColor = "transparent";
+            massExportButton.style.textDecoration = "none";
+        });
+
+        massExportButton.addEventListener('mousedown', function() {
+            massExportButton.style.backgroundColor = '#495055';
+        });
+
+        massExportButton.addEventListener('mouseup', function() {
+            massExportButton.style.backgroundColor = 'transparent';
+        });
+
+
         massExportButton.addEventListener('click', massExport);
 
 
@@ -179,6 +206,7 @@
             if ((lastPage == "") && (currentPage == "frontPage")){
                 massExportButton.style.visibility = "visible";
                 showHideButton.style.visibility = "hidden";
+                topKoltsKez.style.padding = "2px 0px";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
@@ -219,6 +247,7 @@
                 clearInterval(szumInterval);
                 massExportButton.style.visibility = "visible";
                 showHideButton.style.visibility = "hidden";
+                topKoltsKez.style.padding = "2px 0px";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
