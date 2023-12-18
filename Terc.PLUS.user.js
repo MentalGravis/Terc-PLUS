@@ -38,10 +38,16 @@
 
 /*<---------------------------------- TOGGLE BUTTONS ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
 
-        var button = document.createElement("Button");
-        button.innerHTML = "Menüsor";
-        button.style = "top:0;left:0;position:absolute;z-index: 9999"
-        document.body.appendChild(button);
+        const showHideButton = document.createElement("button");
+        showHideButton.textContent = "Menüsor";
+
+        showHideButton.style.position = 'absolute';
+        showHideButton.style.top = "0";
+        showHideButton.style.left = "0";
+        showHideButton.style.zIndex = "9999";
+        showHideButton.style.title = "Megmutatja vagy elrejti a kevésbé használt gombokat";
+
+        document.body.appendChild(showHideButton);
 
         var buttonRearrangement = function(){
 
@@ -78,8 +84,7 @@
             return '#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(' + num + ')';
         }
 
-        jQuery("button").click(function () {
-
+        let toggleRigtMenuRow = function(){
             jQuery(rightMenuRow(1).toString()).toggle();
             jQuery(rightMenuRow(2).toString()).toggle();
             jQuery(rightMenuRow(3).toString()).toggle();
@@ -90,8 +95,9 @@
             jQuery(rightMenuRow(10).toString()).toggle();
             jQuery(rightMenuRow(11).toString()).toggle();
             jQuery(rightMenuRow(12).toString()).toggle();
+        }
 
-        });
+        showHideButton.addEventListener('click', toggleRigtMenuRow);
 
         setInterval(buttonRearrangement, 1000);
 
@@ -102,14 +108,14 @@
         massExportButton.textContent = 'Export Mind';
 
         // Set button styles
-        massExportButton.style.position = 'absolute';
-        massExportButton.style.top = '79px';
-        massExportButton.style.left = '606px';
-        massExportButton.style.zIndex = '9999';
+        massExportButton.style.position = 'relative';
+        massExportButton.style.left = '260px';
+        massExportButton.style.zIndex = "9999";
         massExportButton.title = "Minden kijelölt elem exportálása"
 
         // Append the button to the body of the document
-        document.body.appendChild(massExportButton);
+        let topKoltsKez = document.querySelector('#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)');
+        topKoltsKez.appendChild(massExportButton);
 
         var massExport = function () {
             let ajanlatokLista = "#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div";
@@ -121,9 +127,9 @@
                 if(element.className.includes("selected")){
                     selectedAjanlatIndex.push(index);
 
-                    selectedAjanlatIDLookup = (ajanlatokLista + ":nth-child(" + (index+1) + ")" + "> table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(4) > div:nth-child(1) > a").toString();
+                    let selectedAjanlatIDLookup = (ajanlatokLista + ":nth-child(" + (index+1) + ")" + "> table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(4) > div:nth-child(1) > a").toString();
                 
-                    selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
+                    let selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
 
                     selectedAjanlatLink.push("https://www.etalon.terc.hu/file/dl/" + selectedAjanlatID + "/PDF/2/1/1/1/2/HUF/1/1/1/1/1/2/1/");
                     
@@ -172,7 +178,7 @@
 
             if ((lastPage == "") && (currentPage == "frontPage")){
                 massExportButton.style.visibility = "visible";
-                button.style.visibility = "hidden";
+                showHideButton.style.visibility = "hidden";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
@@ -203,7 +209,7 @@
                 szumInterval
 
                 massExportButton.style.visibility = "hidden";
-                button.style.visibility = "visible";
+                showHideButton.style.visibility = "visible";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
@@ -212,7 +218,7 @@
             if ((lastPage == "innerPage") && (currentPage == "frontPage")) {            // belülről kifele váltás
                 clearInterval(szumInterval);
                 massExportButton.style.visibility = "visible";
-                button.style.visibility = "hidden";
+                showHideButton.style.visibility = "hidden";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
