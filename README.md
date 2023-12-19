@@ -13,7 +13,7 @@ Terc felhasználói felület javítása
 1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
 1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek (alapból elrejtve)
 1. *"Tételek csoportosítása"* ablak automatikus becsukása
-1. Tömeges export: *"Export mind"* gomb megnyomása után minden kijelölt elemet exportál (folyamatos beállításon)
+1. Tömeges export: *"Export All"* gomb megnyomása után minden kijelölt elemet exportál (folyamatos beállításon)
 
 <br>
 
