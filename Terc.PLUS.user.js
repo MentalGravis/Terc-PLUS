@@ -13,7 +13,194 @@
 // ==/UserScript==
 
 (function() {
+
+    'use strict';
+
     jQuery(document).ready(function(){
+
+/*<---------------------------------- SUM OF MONEY ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
+
+            
+        // Variables to store the initial mouse position and menu position
+        let initialMouseX, initialMouseY, initialMenuX, initialMenuY;
+
+        // Create a button to open the menu
+        const openButton = document.createElement('button');
+        openButton.textContent = 'Open Menu';
+        openButton.style.position = 'fixed';
+        openButton.style.top = '10px';
+        openButton.style.left = '10px';
+        openButton.style.zIndex = '9998'; // Set a high z-index value for the button
+        openButton.addEventListener('click', openMenu);
+
+        // Create the menu container
+        const menuContainer = document.createElement('div');
+        menuContainer.style.position = 'absolute'; // Change to absolute positioning
+        menuContainer.style.top = '50px';
+        menuContainer.style.left = '50px';
+        menuContainer.style.width = '450px'; // Set fixed width
+        menuContainer.style.height = '490px'; // Set fixed height
+        menuContainer.style.backgroundColor = '#d7e4f3'; // Set background color
+        menuContainer.style.border = '1px solid #ccc';
+        menuContainer.style.display = 'none';
+        menuContainer.style.zIndex = '9999'; // Set a higher z-index value for the menu container
+        menuContainer.style.userSelect = 'none'; // Disable text selection
+
+        // Create the top row div
+        const topRowDiv = document.createElement('div');
+        topRowDiv.style.backgroundColor = '#c1d5f0'; // Set background color for the top row
+        topRowDiv.style.padding = '5px'; // Set padding for the top row
+        topRowDiv.style.height = '26px'; // Set height for the top row
+        topRowDiv.style.marginBottom = '10px'; // Adjust margin as needed
+        topRowDiv.style.display = 'flex'; // Use flexbox for vertical centering
+        topRowDiv.style.alignItems = 'center'; // Center items vertically
+        topRowDiv.style.cursor = 'grab'; // Set cursor to grab when not hovering
+
+        // Add event listeners for dragging
+        topRowDiv.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', dragMenu);
+        document.addEventListener('mouseup', stopDrag);
+
+        // Add the label to the top row
+        topRowDiv.appendChild(createLabelDiv('Menu'));
+
+        // Create a div for the close button and position it on the right
+        const closeButtonDiv = document.createElement('div');
+        closeButtonDiv.style.marginLeft = 'auto'; // Move close button to the right
+        closeButtonDiv.appendChild(createCloseButton());
+        topRowDiv.appendChild(closeButtonDiv);
+
+        // Add the top row div to the menu container
+        menuContainer.appendChild(topRowDiv);
+
+        // Create the tab strip div
+        const tabStripDiv = document.createElement('div');
+        tabStripDiv.style.display = 'flex';
+
+        // Add tabs
+        const tab1 = createTab('Tab 1', 'content1');
+        const tab2 = createTab('Tab 2', 'content2');
+
+        tabStripDiv.appendChild(tab1);
+        tabStripDiv.appendChild(tab2);
+
+        // Add the tab strip div to the menu container
+        menuContainer.appendChild(tabStripDiv);
+
+        // Create content divs for each tab
+        const content1 = createContentDiv('content1');
+        const content2 = createContentDiv('content2');
+
+        // Add content divs to the menu container
+        menuContainer.appendChild(content1);
+        menuContainer.appendChild(content2);
+
+        // Append the button to the document body
+        document.body.appendChild(openButton);
+
+        // Append the menu container to the document body
+        document.body.appendChild(menuContainer);
+
+        // Function to create a label div
+        function createLabelDiv(label) {
+            const labelDiv = document.createElement('div');
+            labelDiv.textContent = label;
+            labelDiv.style.fontFamily = 'Arial, Tahoma, Verdana, Helvetica'; // Set font type
+            return labelDiv;
+        }
+
+        // Function to create a close button
+        function createCloseButton() {
+            const closeButton = document.createElement('button');
+            closeButton.textContent = '✕'; // Red "X" character
+            closeButton.style.backgroundColor = 'red';
+            closeButton.style.border = 'none';
+            closeButton.style.color = 'white';
+            closeButton.style.fontSize = '18px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.height = '26px'; // Set height
+            closeButton.style.width = '26px'; // Set width
+            closeButton.addEventListener('click', closeMenu);
+            return closeButton;
+        }
+
+        // Function to create a tab
+        function createTab(label, contentId) {
+            const tab = document.createElement('div');
+            tab.textContent = label;
+            tab.style.padding = '10px';
+            tab.style.cursor = 'pointer';
+            tab.style.border = '1px solid #ccc';
+            tab.style.borderRadius = '5px';
+            tab.style.marginRight = '5px';
+            tab.addEventListener('click', () => showContent(contentId));
+            return tab;
+        }
+
+        // Function to create a content div
+        function createContentDiv(id) {
+            const contentDiv = document.createElement('div');
+            contentDiv.id = id;
+            contentDiv.style.display = 'none';
+            contentDiv.style.padding = '10px';
+            contentDiv.style.border = '1px solid #ccc';
+            contentDiv.style.borderRadius = '5px';
+            contentDiv.style.marginTop = '10px';
+            return contentDiv;
+        }
+
+        // Function to open the menu
+        function openMenu() {
+            menuContainer.style.display = 'block';
+        }
+
+        // Function to close the menu
+        function closeMenu() {
+            menuContainer.style.display = 'none';
+        }
+
+        // Function to start the drag
+        function startDrag(event) {
+            initialMouseX = event.clientX;
+            initialMouseY = event.clientY;
+            initialMenuX = menuContainer.offsetLeft;
+            initialMenuY = menuContainer.offsetTop;
+            menuContainer.style.opacity = '0.8'; // Set transparency to 80%
+            document.body.style.cursor = 'move'; // Set cursor to move
+        }
+
+        // Function to drag the menu
+        function dragMenu(event) {
+            if (initialMouseX !== undefined) {
+                const offsetX = event.clientX - initialMouseX;
+                const offsetY = event.clientY - initialMouseY;
+                menuContainer.style.left = initialMenuX + offsetX + 'px';
+                menuContainer.style.top = initialMenuY + offsetY + 'px';
+            }
+        }
+
+        // Function to stop the drag
+        function stopDrag() {
+            initialMouseX = undefined;
+            menuContainer.style.opacity = '1.0'; // Reset transparency
+            document.body.style.cursor = ''; // Reset cursor
+        }
+
+        // Function to show content based on tab
+        function showContent(contentId) {
+            // Hide all content divs
+            const contentDivs = menuContainer.querySelectorAll('[id^=content]');
+            contentDivs.forEach(div => {
+                div.style.display = 'none';
+            });
+
+            // Show the selected content div
+            const selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+        }
+
 
 /*<---------------------------------- SUM OF MONEY ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
 
