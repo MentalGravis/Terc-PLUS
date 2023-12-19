@@ -253,6 +253,10 @@
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
             }
 
+
+            if ((lastPage == "innerPage") && (currentPage == "innerPage")) {
+                szumInterval;
+            }
             //console.log("lastPage: " + lastPage + "  ||  currentPage: " + currentPage);
             lastPage = currentPage;
 

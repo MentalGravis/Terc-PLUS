@@ -52,6 +52,7 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
 - [x] [~~Néha a menüsor gombaji furcsán jelennek meg, és a fejlécbe lógnak~~](https://github.com/MentalGravis/Terc-PLUS/issues/2)
 - [x] [~~Néha több ajánlat megnyitása utána a címsor helye üresen megmarad, ami a fejléc szétcsúszásához vezet~~](https://github.com/MentalGravis/Terc-PLUS/issues/3)
 - [x] [~~(Opcionális) Ajánlat teljes árának pénzneme fekete, míg a sorban a többi mértékegység kék~~](https://github.com/MentalGravis/Terc-PLUS/issues/4)
+- [x] [~~Nem látszik a teljes összeg!~~](https://github.com/MentalGravis/Terc-PLUS/issues/17)
 
 <br>
 
