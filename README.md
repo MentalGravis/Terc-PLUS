@@ -75,3 +75,5 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
             * gyakran sok tétel egyesült ára jelenik meg, melyet érdemes szétosztani
 1. ["Fontos" label költségvetésre, ami alapján mindig első helyen jelenik meg](https://github.com/MentalGravis/Terc-PLUS/issues/12)
 1. [Saját adattár nem K tételét megpróbálja megtalálni öntételben](https://github.com/MentalGravis/Terc-PLUS/issues/13)
+1. [Új költségvetés létrehozásánál default értékek automatikus kitöltése](https://github.com/MentalGravis/Terc-PLUS/issues/18)
+    * default értékek menüben állíthatóak be
