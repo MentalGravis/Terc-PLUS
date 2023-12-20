@@ -28,7 +28,7 @@
 
                 document.querySelector("#tea-igrid > div:nth-child(1) > span:nth-child(1) > span:nth-child(1)").outerHTML = teljesOsszSzoveg;
             }
-            console.log("fut a szum");
+            //console.log("fut a szum");
         }
 
         //var szumInterval = setInterval(szumOfAll, 500);
