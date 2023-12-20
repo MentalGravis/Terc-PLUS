@@ -40,21 +40,23 @@
         menuContainer.style.left = '50px';
         menuContainer.style.width = '450px'; // Set fixed width
         menuContainer.style.height = '490px'; // Set fixed height
-        menuContainer.style.backgroundColor = '#d7e4f3'; // Set background color
+        menuContainer.style.backgroundColor = '#c1d5f0'; // Set background color
         menuContainer.style.border = '1px solid #ccc';
         menuContainer.style.display = 'none';
         menuContainer.style.zIndex = '9999'; // Set a higher z-index value for the menu container
         menuContainer.style.userSelect = 'none'; // Disable text selection
+        menuContainer.style.font = 'normal 11px Arial, Tahoma, Helvetica, sans-serif'; // Set font styles
 
         // Create the top row div
         const topRowDiv = document.createElement('div');
         topRowDiv.style.backgroundColor = '#c1d5f0'; // Set background color for the top row
         topRowDiv.style.padding = '5px'; // Set padding for the top row
         topRowDiv.style.height = '26px'; // Set height for the top row
-        topRowDiv.style.marginBottom = '10px'; // Adjust margin as needed
+        topRowDiv.style.marginBottom = '0'; // Set bottom margin to 0
         topRowDiv.style.display = 'flex'; // Use flexbox for vertical centering
         topRowDiv.style.alignItems = 'center'; // Center items vertically
         topRowDiv.style.cursor = 'grab'; // Set cursor to grab when not hovering
+        topRowDiv.style.font = 'normal 11px Arial, Tahoma, Helvetica, sans-serif'; // Set font styles
 
         // Add event listeners for dragging
         topRowDiv.addEventListener('mousedown', startDrag);
@@ -76,6 +78,9 @@
         // Create the tab strip div
         const tabStripDiv = document.createElement('div');
         tabStripDiv.style.display = 'flex';
+        tabStripDiv.style.backgroundColor = '#d7e4f3'; // Set background color for the tab strip
+        tabStripDiv.style.padding = '10px 0 0 0'; // Set top padding to 10
+        tabStripDiv.style.font = 'normal 11px Arial, Tahoma, Helvetica, sans-serif'; // Set font styles
 
         // Add tabs
         const tab1 = createTab('Tab 1', 'content1');
@@ -87,9 +92,20 @@
         // Add the tab strip div to the menu container
         menuContainer.appendChild(tabStripDiv);
 
-        // Create content divs for each tab
+        // Create content divs for each tab with checkboxes
         const content1 = createContentDiv('content1');
+        createCheckbox(content1, 'Option 1');
+        createCheckbox(content1, 'Option 2');
+        createCheckbox(content1, 'Option 3');
+
         const content2 = createContentDiv('content2');
+        createCheckbox(content2, 'Option A');
+        createCheckbox(content2, 'Option B');
+        createCheckbox(content2, 'Option C');
+
+        // Create content divs for each tab
+        // const content1 = createContentDiv('content1');
+        // const content2 = createContentDiv('content2');
 
         // Add content divs to the menu container
         menuContainer.appendChild(content1);
@@ -130,10 +146,9 @@
             tab.textContent = label;
             tab.style.padding = '10px';
             tab.style.cursor = 'pointer';
-            tab.style.border = '1px solid #ccc';
-            tab.style.borderRadius = '5px';
-            tab.style.marginRight = '5px';
-            tab.addEventListener('click', () => showContent(contentId));
+            tab.style.border = '2px solid #d7e4f3'; // Set border color and thickness for inactive tab
+            tab.style.borderRadius = '0'; // Set border radius to 0
+            tab.style.marginRight = '0'; // Set right margin to 0
             return tab;
         }
 
@@ -143,11 +158,70 @@
             contentDiv.id = id;
             contentDiv.style.display = 'none';
             contentDiv.style.padding = '10px';
-            contentDiv.style.border = '1px solid #ccc';
-            contentDiv.style.borderRadius = '5px';
-            contentDiv.style.marginTop = '10px';
+            contentDiv.style.border = 'none'; // Remove border
+            contentDiv.style.borderRadius = '0'; // Set border radius to 0
+            contentDiv.style.backgroundColor = 'transparent'; // Set background to transparent
+            contentDiv.style.marginTop = '0'; // Remove top margin
             return contentDiv;
         }
+        
+        // Function to create a checkbox
+        function createCheckbox(container, label) {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = label.replace(/\s+/g, '-').toLowerCase(); // Convert label to lowercase and replace spaces with hyphens
+            const labelElement = document.createElement('label');
+            labelElement.textContent = label;
+            labelElement.htmlFor = checkbox.id;
+            container.appendChild(checkbox);
+            container.appendChild(labelElement);
+            container.appendChild(document.createElement('br')); // Add line break for spacing
+        }
+        
+        // Function to open the menu and show tab1 content
+        function openMenuAndShowTab1() {
+            menuContainer.style.display = 'block';
+            showContent('content1'); // Show the content of tab1
+        }
+
+        // Add a click event listener to tab1 to show its content and apply styles
+        tab1.addEventListener('click', () => {
+            showContent('content1');
+            applyActiveStyles(tab1, content1);
+        });
+
+        // Add a click event listener to tab2 to show its content and apply styles
+        tab2.addEventListener('click', () => {
+            showContent('content2');
+            applyActiveStyles(tab2, content2);
+        });
+
+        // Function to apply styles to the active tab and content
+        function applyActiveStyles(activeTab, activeContent) {
+            // Reset styles for all tabs and contents
+            const allTabs = tabStripDiv.querySelectorAll('div');
+            const allContents = menuContainer.querySelectorAll('[id^=content]');
+            allTabs.forEach(tab => {
+                tab.style.backgroundColor = '';
+                tab.style.border = '1px solid #ccc';
+            });
+            allContents.forEach(content => {
+                content.style.backgroundColor = '';
+                content.style.border = '1px solid #ccc';
+                content.style.height = '0'; // Reset height
+            });
+
+            // Apply styles to the active tab and content
+            activeTab.style.backgroundColor = '#c1d5f0';
+            activeTab.style.border = 'none';
+
+            activeContent.style.backgroundColor = '#c1d5f0';
+            activeContent.style.border = 'none';
+            activeContent.style.height = '375px'; // Set height to 375 pixels
+        }
+
+        // Add the openMenuAndShowTab1 function to the openButton click event
+        openButton.addEventListener('click', openMenuAndShowTab1);
 
         // Function to open the menu
         function openMenu() {
