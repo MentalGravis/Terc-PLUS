@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Terc PLUS
 // @namespace    http://tampermonkey.net/
-// @version      2.3.1
+// @version      2.3.5
 // @description  Különböző funkciókkal bővíti a TERC-ETALON webalkalmazást
 // @author       Mental Gravis
 // @match        https://www.etalon.terc.hu/browser
@@ -81,7 +81,7 @@
             return '#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(' + num + ')';
         }
 
-        let toggleRigtMenuRow = function(){
+        var toggleRigtMenuRow = function(){
             jQuery(rightMenuRow(1).toString()).toggle();
             jQuery(rightMenuRow(2).toString()).toggle();
             jQuery(rightMenuRow(3).toString()).toggle();
@@ -96,7 +96,7 @@
 
         showHideButton.addEventListener('click', toggleRigtMenuRow);
 
-        setInterval(buttonRearrangement, 1000);
+        //setInterval(buttonRearrangement, 1000);
 
         /*<---------------------------------------------- MASS EXPORT -------------------------------------------------------------------------------->*/
 
@@ -212,18 +212,10 @@
             //var szumInterval;
 
             if ((lastPage == "frontPage") && (currentPage == "innerPage")){             // kívülről befele váltás
-                if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible')) && jQuery(rightMenuRow(6).toString()).is(':visible')){
-                    jQuery(rightMenuRow(1).toString()).hide();
-                    jQuery(rightMenuRow(2).toString()).hide();
-                    jQuery(rightMenuRow(3).toString()).hide();
-                    jQuery(rightMenuRow(4).toString()).hide();
-                    jQuery(rightMenuRow(5).toString()).hide();
-                    jQuery(rightMenuRow(6).toString()).hide();
-                    jQuery(rightMenuRow(9).toString()).hide();
-                    jQuery(rightMenuRow(10).toString()).hide();
-                    jQuery(rightMenuRow(11).toString()).hide();
-                    jQuery(rightMenuRow(12).toString()).hide();
-                }
+                
+                buttonRearrangement();
+
+                toggleRigtMenuRow();
 
                 let leftPanelTetelekCsoportositasa = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)');
 
@@ -241,7 +233,6 @@
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
-
             }
             if ((lastPage == "innerPage") && (currentPage == "frontPage")) {            // belülről kifele váltás
 
@@ -255,6 +246,7 @@
 
             if ((lastPage == "innerPage") && (currentPage == "innerPage")) {
                 szumOfAll();
+                buttonRearrangement();
             }
             // console.log("lastPage: " + lastPage + "  ||  currentPage: " + currentPage);
             lastPage = currentPage;
