@@ -105,8 +105,8 @@
 
         // Load checkbox states from local storage
         const defaultCheckboxState = loadCheckboxState('default_checkboxState');
-        const userCheckboxState = loadCheckboxState('user_checkboxState'); 
-
+        const userCheckboxState = loadCheckboxState('user_checkboxState');
+        
         // Create content divs for each tab with checkboxes---------------------------------------------------menüopciók---------------------------------------->
         const altalanos = createContentDiv('altalanos');
         createCheckbox(altalanos, 'Menügombok automatikus elrejtése', true); // Default value set to true
