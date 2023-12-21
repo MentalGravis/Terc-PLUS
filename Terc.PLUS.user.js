@@ -31,6 +31,7 @@
 
         // Create the menu container
         const menuContainer = document.createElement('div');
+        menuContainer.id = 'terc-plus-menu';
         menuContainer.style.position = 'absolute'; // Change to absolute positioning
         menuContainer.style.top = '50px';
         menuContainer.style.left = '50px';
@@ -60,7 +61,7 @@
         document.addEventListener('mouseup', stopDrag);
 
         // Add the label to the top row
-        topRowDiv.appendChild(createLabelDiv('Menu'));
+        topRowDiv.appendChild(createLabelDiv('Terc-PLUS Menü'));
 
         // Create a div for the close button and position it on the right
         const closeButtonDiv = document.createElement('div');
@@ -79,7 +80,7 @@
         tabStripDiv.style.font = 'normal 11px Arial, Tahoma, Helvetica, sans-serif'; // Set font styles
 
         // Add tabs
-        const tab1 = createTab('Tab 1', 'content1');
+        const tab1 = createTab('Általános', 'altalanos');
         const tab2 = createTab('Tab 2', 'content2');
 
         tabStripDiv.appendChild(tab1);
@@ -89,9 +90,9 @@
         menuContainer.appendChild(tabStripDiv);
 
         // Create content divs for each tab with checkboxes
-        const content1 = createContentDiv('content1');
-        createCheckbox(content1, 'Option 1');
-        createCheckbox(content1, 'Option 2');
+        const content1 = createContentDiv('altalanos');
+        createCheckbox(content1, 'Menügombok automatikus elrejtése');
+        createCheckbox(content1, 'Tételek csoportosításának elrejtése');
         createCheckbox(content1, 'Option 3');
 
         const content2 = createContentDiv('content2');
@@ -118,6 +119,8 @@
             const labelDiv = document.createElement('div');
             labelDiv.textContent = label;
             labelDiv.style.fontFamily = 'Arial, Tahoma, Verdana, Helvetica'; // Set font type
+            labelDiv.style.fontWeight = 'bold';
+            labelDiv.style.color = '#15428b';
             return labelDiv;
         }
 
@@ -170,15 +173,25 @@
             const labelElement = document.createElement('label');
             labelElement.textContent = label;
             labelElement.htmlFor = checkbox.id;
+            labelElement.style.marginLeft = "10px";
+            const spacing = document.createElement('div');
+            spacing.style.margin = 0;
+            spacing.style.height = "10px";
             container.appendChild(checkbox);
             container.appendChild(labelElement);
-            container.appendChild(document.createElement('br')); // Add line break for spacing
+            // container.appendChild(document.createElement('br')); // Add line break for spacing
+            container.appendChild(spacing);
         }
         
         // Function to open the menu and show tab1 content
         function openMenuAndShowTab1() {
-            menuContainer.style.display = 'block';
-            showContent('content1'); // Show the content of tab1
+            let firstOpen = 0;
+            if(firstOpen == 0){
+                jQuery('#terc-plus-menu > div:nth-child(2) > div:nth-child(1)').click();
+                firstOpen++;
+            }
+            // menuContainer.style.display = 'block';
+            // showContent('content1'); // Show the content of tab1
         }
 
         // Add a click event listener to tab1 to show its content and apply styles
@@ -214,7 +227,6 @@
 
             activeContent.style.backgroundColor = '#c1d5f0';
             activeContent.style.border = 'none';
-            activeContent.style.height = '375px'; // Set height to 375 pixels
         }
 
         // Add the openMenuAndShowTab1 function to the openButton click event
