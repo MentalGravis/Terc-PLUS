@@ -22,12 +22,26 @@
 
         // Create a button to open the menu
         const openButton = document.createElement('button');
-        openButton.textContent = 'Open Menu';
+        openButton.textContent = 'Terc-PLUS menü';
+        openButton.style.display = 'block';
         openButton.style.position = 'fixed';
         openButton.style.top = '10px';
         openButton.style.left = '10px';
+        openButton.style.height = '30px';
+        //openButton.style.fontSize = '14px';
+        openButton.style.color = 'white';
+        openButton.style.borderRadius = '0px';
+        openButton.style.cursor = 'pointer';
         openButton.style.zIndex = '9998'; // Set a high z-index value for the button
-        openButton.addEventListener('click', openMenu);
+        openButton.style.border = 'none';
+        openButton.style.backgroundColor = '#14458e';
+        openButton.addEventListener('click', function() {
+            if(menuContainer.style.display == "none"){
+                openMenu();
+            } else if (menuContainer.style.display == "block") {
+                closeMenu();
+            }
+        });
 
         // Create the menu container
         const menuContainer = document.createElement('div');
@@ -81,38 +95,109 @@
 
         // Add tabs
         const tab1 = createTab('Általános', 'altalanos');
-        const tab2 = createTab('Tab 2', 'content2');
+        //const tab2 = createTab('Tab 2', 'content2');
 
         tabStripDiv.appendChild(tab1);
-        tabStripDiv.appendChild(tab2);
+        //tabStripDiv.appendChild(tab2);
 
         // Add the tab strip div to the menu container
         menuContainer.appendChild(tabStripDiv);
 
-        // Create content divs for each tab with checkboxes
-        const content1 = createContentDiv('altalanos');
-        createCheckbox(content1, 'Menügombok automatikus elrejtése');
-        createCheckbox(content1, 'Tételek csoportosításának elrejtése');
-        createCheckbox(content1, 'Option 3');
+        // Load checkbox states from local storage
+        const defaultCheckboxState = loadCheckboxState('default_checkboxState');
+        const userCheckboxState = loadCheckboxState('user_checkboxState'); 
 
-        const content2 = createContentDiv('content2');
-        createCheckbox(content2, 'Option A');
-        createCheckbox(content2, 'Option B');
-        createCheckbox(content2, 'Option C');
+        // Create content divs for each tab with checkboxes---------------------------------------------------menüopciók---------------------------------------->
+        const altalanos = createContentDiv('altalanos');
+        createCheckbox(altalanos, 'Menügombok automatikus elrejtése', true); // Default value set to true
+        createCheckbox(altalanos, 'Tételek csoportosításának elrejtése', true);
+        createCheckbox(altalanos, '\"Export All\" lehetőség megjelenítése', true);
+
+        // const content2 = createContentDiv('content2');
+        // createCheckbox(content2, 'Option A');
+        // createCheckbox(content2, 'Option B');
+        // createCheckbox(content2, 'Option C');
 
         // Create content divs for each tab
         // const content1 = createContentDiv('content1');
         // const content2 = createContentDiv('content2');
 
         // Add content divs to the menu container
-        menuContainer.appendChild(content1);
-        menuContainer.appendChild(content2);
+        menuContainer.appendChild(altalanos);
+        // menuContainer.appendChild(content2);
 
         // Append the button to the document body
         document.body.appendChild(openButton);
 
         // Append the menu container to the document body
+        //document.body.appendChild(menuContainer);
+
+        // Apply default states to checkboxes
+        applyCheckboxState(defaultCheckboxState);
+
+        // Append the menu container to the document body
         document.body.appendChild(menuContainer);
+
+        // Function to create a checkbox
+        function createCheckbox(container, label, defaultValue) {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = generateCheckboxID(container.id, label);
+            const labelElement = document.createElement('label');
+            labelElement.textContent = label;
+            labelElement.htmlFor = checkbox.id;
+            labelElement.style.padding = "5px 10px 5px 5px";
+            labelElement.style.marginTop = "10px";
+            const spacing = document.createElement('div');
+            spacing.style.margin = 0;
+            spacing.style.height = "10px";
+            container.appendChild(checkbox);
+            container.appendChild(labelElement);
+            container.appendChild(document.createElement('br'));
+            container.appendChild(spacing);
+
+            // Check if user state is available, otherwise use default
+            const isChecked = userCheckboxState[checkbox.id] !== undefined ? userCheckboxState[checkbox.id] : defaultValue;
+
+            // Apply state to checkbox
+            checkbox.checked = isChecked;
+
+            // // Save default state
+            defaultCheckboxState[checkbox.id] = defaultValue;
+
+            // Add change event listener to save user state
+            checkbox.addEventListener('change', function() {
+                userCheckboxState[checkbox.id] = checkbox.checked;
+                saveCheckboxState('user_checkboxState', userCheckboxState);
+            });
+        }
+
+        // Function to generate checkbox ID based on container ID and label
+        function generateCheckboxID(containerID, label) {
+            const sanitizedLabel = label.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase();
+            return `${containerID}-${sanitizedLabel}`;
+        }
+
+        // Function to load checkbox state from local storage
+        function loadCheckboxState(key) {
+            const storedState = localStorage.getItem(key);
+            return storedState ? JSON.parse(storedState) : {};
+        }
+
+        // Function to save checkbox state to local storage
+        function saveCheckboxState(key, state) {
+            localStorage.setItem(key, JSON.stringify(state));
+        }
+
+        // Function to apply checkbox state to checkboxes
+        function applyCheckboxState(state) {
+            for (const checkboxID in state) {
+                const checkbox = document.getElementById(checkboxID);
+                if (checkbox) {
+                    checkbox.checked = state[checkboxID];
+                }
+            }
+        }
 
         // Function to create a label div
         function createLabelDiv(label) {
@@ -145,7 +230,10 @@
             tab.textContent = label;
             tab.style.padding = '10px';
             tab.style.cursor = 'pointer';
-            tab.style.border = '2px solid #d7e4f3'; // Set border color and thickness for inactive tab
+            tab.style.borderLeft = 'none';
+            tab.style.borderBottom = 'none';
+            tab.style.borderRight = '2px solid #2596be';
+            tab.style.borderTop = '2px solid #2596be';
             tab.style.borderRadius = '0'; // Set border radius to 0
             tab.style.marginRight = '0'; // Set right margin to 0
             return tab;
@@ -165,24 +253,26 @@
             return contentDiv;
         }
         
-        // Function to create a checkbox
-        function createCheckbox(container, label) {
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = label.replace(/\s+/g, '-').toLowerCase(); // Convert label to lowercase and replace spaces with hyphens
-            const labelElement = document.createElement('label');
-            labelElement.textContent = label;
-            labelElement.htmlFor = checkbox.id;
-            labelElement.style.marginLeft = "10px";
-            const spacing = document.createElement('div');
-            spacing.style.margin = 0;
-            spacing.style.height = "10px";
-            container.appendChild(checkbox);
-            container.appendChild(labelElement);
-            // container.appendChild(document.createElement('br')); // Add line break for spacing
-            container.appendChild(spacing);
-        }
-        
+        // // Function to create a checkbox
+        // function createCheckbox(container, label) {
+        //     const checkbox = document.createElement('input');
+        //     checkbox.type = 'checkbox';
+        //     checkbox.id = label.replace(/\s+/g, '-').toLowerCase(); // Convert label to lowercase and replace spaces with hyphens
+        //     const labelElement = document.createElement('label');
+        //     labelElement.textContent = label;
+        //     labelElement.htmlFor = checkbox.id;
+        //     labelElement.style.padding = "5px 10px 5px 5px";
+        //     labelElement.style.marginTop = "10px";
+        //     const spacing = document.createElement('div');
+        //     spacing.style.margin = 0;
+        //     spacing.style.height = "10px";
+        //     container.appendChild(checkbox);
+        //     container.appendChild(labelElement);
+        //     // container.appendChild(document.createElement('br')); // Add line break for spacing
+        //     container.appendChild(spacing);
+        // }
+
+
         // Function to open the menu and show tab1 content
         function openMenuAndShowTab1() {
             let firstOpen = 0;
@@ -196,15 +286,15 @@
 
         // Add a click event listener to tab1 to show its content and apply styles
         tab1.addEventListener('click', () => {
-            showContent('content1');
-            applyActiveStyles(tab1, content1);
+            showContent('altalanos');
+            applyActiveStyles(tab1, altalanos);
         });
 
         // Add a click event listener to tab2 to show its content and apply styles
-        tab2.addEventListener('click', () => {
-            showContent('content2');
-            applyActiveStyles(tab2, content2);
-        });
+        // tab2.addEventListener('click', () => {
+        //     showContent('content2');
+        //     applyActiveStyles(tab2, content2);
+        // });
 
         // Function to apply styles to the active tab and content
         function applyActiveStyles(activeTab, activeContent) {
@@ -482,6 +572,8 @@
 
             if ((lastPage == "frontPage") && (currentPage == "innerPage")){             // kívülről befele váltás
                 
+                openButton.style.display = 'none';
+
                 buttonRearrangement();
 
                 toggleRigtMenuRow();
@@ -489,11 +581,8 @@
                 let leftPanelTetelekCsoportositasa = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)');
 
                 if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible')) && leftPanelTetelekCsoportositasa.is(':visible')){
-
                     jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)').click();
-
                 };
-
 
                 //szumOfAll;
 
@@ -511,6 +600,8 @@
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
+            
+                openButton.style.display = 'block';
             }
 
             if ((lastPage == "innerPage") && (currentPage == "innerPage")) {
@@ -524,7 +615,6 @@
         }
 
         setInterval(freshPage, 750);
-
 
     });
 })();
