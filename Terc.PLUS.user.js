@@ -106,6 +106,8 @@
         // Load checkbox states from local storage
         const defaultCheckboxState = loadCheckboxState('default_checkboxState');
         const userCheckboxState = loadCheckboxState('user_checkboxState');
+
+        console.log(typeof userCheckboxState);
         
         // Create content divs for each tab with checkboxes---------------------------------------------------menüopciók---------------------------------------->
         const altalanos = createContentDiv('altalanos');
@@ -465,6 +467,7 @@
 
         // Set button styles
         massExportButton.style.position = 'relative';
+        // massExportButton.style.display = 'none';
         massExportButton.style.left = '276px';
         massExportButton.style.zIndex = "9999";
         massExportButton.style.cursor = "pointer";
@@ -477,9 +480,39 @@
         massExportButton.style.transition = 'background-color 0s ease-in-out';
         massExportButton.title = "Minden kijelölt elem exportálása";
 
+        function checkCheckboxStateAndToggleButton() {
+            const checkboxIdToCheck = 'altalanos-export-all-lehetsg-megjelentse'; // Replace with the actual checkbox ID you want to check
+            const checkbox = document.getElementById(checkboxIdToCheck);
+        
+            if (checkbox) {
+                // Check if the checkbox is checked
+                const isChecked = checkbox.checked;
+        
+                // Toggle massExportButton based on checkbox state
+                if (isChecked) {
+                    massExportButton.style.display = 'inline-block';
+                    //massExportButton.visibility = "visible";
+                } else {
+                    massExportButton.style.display = 'none';
+                    //massExportButton.visibility = "transparent";
+                }
+            }
+        }
+        
+        // Call the function initially to set the initial state
+        checkCheckboxStateAndToggleButton();
+
+        // Add an event listener to the checkbox for changes
+        const checkboxToCheck = document.getElementById('altalanos-export-all-lehetsg-megjelentse'); // Replace with the actual checkbox ID
+        if (checkboxToCheck) {
+            checkboxToCheck.addEventListener('change', checkCheckboxStateAndToggleButton);
+        }
+
         // Append the button to the body of the document
         let topKoltsKez = document.querySelector('#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)');
+        topKoltsKez.style.height = '20px';
         topKoltsKez.appendChild(massExportButton);
+        topKoltsKez.style.padding = "2px 0px";
 
         var massExport = function () {
             let ajanlatokLista = "#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div";
@@ -560,7 +593,9 @@
             }
 
             if ((lastPage == "") && (currentPage == "frontPage")){
-                massExportButton.style.visibility = "visible";
+                
+                checkCheckboxStateAndToggleButton();
+
                 showHideButton.style.visibility = "hidden";
                 topKoltsKez.style.padding = "2px 0px";
 
@@ -586,17 +621,19 @@
 
                 //szumOfAll;
 
-                massExportButton.style.visibility = "hidden";
-                showHideButton.style.visibility = "visible";
+                // massExportButton.style.visibility = "transparent";
+
+                showHideButton.style.display = "block";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
             }
             if ((lastPage == "innerPage") && (currentPage == "frontPage")) {            // belülről kifele váltás
 
-                massExportButton.style.visibility = "visible";
-                showHideButton.style.visibility = "hidden";
-                topKoltsKez.style.padding = "2px 0px";
+
+                checkCheckboxStateAndToggleButton();
+                
+                showHideButton.style.display = "none";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
