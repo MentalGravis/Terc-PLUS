@@ -14,6 +14,7 @@ Terc felhasználói felület javítása
 1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek (alapból elrejtve)
 1. *"Tételek csoportosítása"* ablak automatikus becsukása
 1. Tömeges export: *"Export All"* gomb megnyomása után minden kijelölt elemet exportál (folyamatos beállításon)
+1. Lebegő menü, minek segítségével az egyes funkciókat ki/be lehet kapcsolni
 
 <br>
 
@@ -58,7 +59,6 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
 
 # Lehetséges új funkciók
 
-1. [Lebegő menü létrehozása, scriptbe épített featureök ezen keresztüli beállítása](https://github.com/MentalGravis/Terc-PLUS/issues/10)
 1. [Saját memóriába mentett TERC email kontaktok](https://github.com/MentalGravis/Terc-PLUS/issues/5), melyeket mind küldésnél, mind fogadásnál naplóz, majd küldésnél egy legördülő listából lehet válogatni
     * A fentebb említett menübe integrálás, oly módon, hogy beceneveket lehessen adott email-hez beállítani
     * Monkey saját memóriájának használata, Kulcs - Érték párok
