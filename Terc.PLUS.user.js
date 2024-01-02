@@ -372,8 +372,6 @@
             //console.log("fut a szum");
         }
 
-        //var szumInterval = setInterval(szumOfAll, 500);
-
 /*<---------------------------------- TOGGLE BUTTONS ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->*/
 
         const showHideButton = document.createElement("button");
@@ -441,6 +439,7 @@
         let showHideCheckbox = document.querySelector('#altalanos-mengombok-automatikus-elrejtse');
         
         let tetelekCsoportositasaCheckbox = document.querySelector('#altalanos-ttelek-csoportostsnak-elrejtse')
+
         /*<---------------------------------------------- MASS EXPORT -------------------------------------------------------------------------------->*/
 
 
@@ -484,7 +483,6 @@
 
                     let selectedAjanlatIDLookup = (ajanlatokLista + ":nth-child(" + (index+1) + ")" + "> table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(10) > div:nth-child(1) > a").toString();
 
-                    // let selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
                     let selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
 
                     selectedAjanlatLink.push("https://www.etalon.terc.hu/file/dl/" + selectedAjanlatID + "/PDF/2/1/1/1/2/HUF/1/1/1/1/1/2/1/");
@@ -556,7 +554,6 @@
 
         /*<---------------------------------------- FRESH PAGE -------------------------------------------------------------------------------------->*/
 
-
         var currentPage = "";
         var lastPage = "";
 
@@ -584,8 +581,11 @@
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
             }
 
+            //var szumInterval;
+
             if ((lastPage == "frontPage") && (currentPage == "innerPage")){             // kívülről befele váltás
                 
+
                 openButton.style.display = 'none';
 
                 buttonRearrangement();
@@ -596,6 +596,7 @@
                 if ((tetelekCsoportositasaCheckbox.checked) && !(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
                     jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)').click();
                 }
+
 
                 if ((showHideCheckbox.checked) && (showHideButton.style.display == "none")){
                     showHideButton.style.display = 'block';                        
@@ -608,11 +609,6 @@
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
             }
             if ((lastPage == "innerPage") && (currentPage == "frontPage")) {            // belülről kifele váltás
-
-
-                // checkCheckboxStateAndToggleButton();
-                // toggleInlineBlock();
-
 
                 showHideButton.style.display = "none";
 
