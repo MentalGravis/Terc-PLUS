@@ -438,8 +438,9 @@
 
         showHideButton.addEventListener('click', toggleRigtMenuRow);
 
-        //setInterval(buttonRearrangement, 1000);
-
+        let showHideCheckbox = document.querySelector('#altalanos-mengombok-automatikus-elrejtse');
+        
+        let tetelekCsoportositasaCheckbox = document.querySelector('#altalanos-ttelek-csoportostsnak-elrejtse')
         /*<---------------------------------------------- MASS EXPORT -------------------------------------------------------------------------------->*/
 
 
@@ -449,7 +450,6 @@
 
         // Set button styles
         massExportButton.style.position = 'relative';
-        // massExportButton.style.display = 'none';
         massExportButton.style.left = '276px';
         massExportButton.style.zIndex = "9999";
         massExportButton.style.cursor = "pointer";
@@ -462,99 +462,15 @@
         massExportButton.style.transition = 'background-color 0s ease-in-out';
         massExportButton.title = "Minden kijelölt elem exportálása";
 
-        // function checkCheckboxStateAndToggleButton() {
-        //     const checkboxIdToCheck = 'altalanos-export-all-lehetsg-megjelentse'; // Replace with the actual checkbox ID you want to check
-        //     const checkbox = document.getElementById(checkboxIdToCheck);
-        
-        //     if (checkbox) {
-        //         Check if the checkbox is checked
-        //         const isChecked = checkbox.checked;
-        
-        //         Toggle massExportButton based on checkbox state
-        //         if (isChecked) {
-        //             massExportButton.style.display = 'inline-block';
-        //             massExportButton.visibility = "visible";
-        //         } else {
-        //             massExportButton.style.display = 'none';
-        //             massExportButton.visibility = "transparent";
-        //         }
-        //     }
-        // }
-        
-        // // Call the function initially to set the initial state
-        // checkCheckboxStateAndToggleButton();
-
-        // // Add an event listener to the checkbox for changes
-        // const checkboxToCheck = document.getElementById('altalanos-export-all-lehetsg-megjelentse'); // Replace with the actual checkbox ID
-        // if (checkboxToCheck) {
-        //     checkboxToCheck.addEventListener('change', checkCheckboxStateAndToggleButton);
-        // }
-
-        // Function to toggle visibility of an element
-        function toggleVisibility(elementId) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.style.display = element.style.display === 'none' ? 'inline-block' : 'none';
-            }
-        }
-
-        // Function to toggle click on an element
-        function toggleClick(elementId) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                if (element.tagName === 'BUTTON' || element.tagName === 'A') {
-                        element.click();
-                }
-                // You can add more conditions based on the type of element you want to click
-            }
-        }
-
-        // Function to toggle between inline block and none
-        function toggleInlineBlock(elementId) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.style.display = element.style.display === 'none' ? 'inline-block' : 'none';
-            }
-        }
-
-        // Function to toggle actions based on checkbox state
-        function toggleActions(checkboxId, actionFunction, elementId) {
-            const checkbox = document.getElementById(checkboxId);
-
-            if (checkbox) {
-                // Execute the action only if the checkbox is initially unchecked
-                if (!checkbox.checked) {
-                    actionFunction(elementId);
-                }
-
-                // Add change event listener to handle future changes
-                checkbox.addEventListener('change', () => {
-                    actionFunction(elementId);
-                });
-            }
-        }
-
-        // Set of checkbox-action pairs
-        const checkboxActions = [
-            { checkboxId: 'altalanos-export-all-lehetsg-megjelentse', actionFunction: toggleInlineBlock, elementId: 'tercplusExportButton' },
-            //{ checkboxId: 'checkbox2', actionFunction: toggleClick, elementId: 'button2' },
-            //{ checkboxId: 'checkbox3', actionFunction: toggleInlineBlock, elementId: 'button3' }
-            // Add more pairs as needed
-        ];
-
-        // Initialize event listeners for each checkbox-action pair
-        checkboxActions.forEach(pair => {
-            toggleActions(pair.checkboxId, pair.actionFunction, pair.elementId);
-        });
-
-
-
-
         // Append the button to the body of the document
         let topKoltsKez = document.querySelector('#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)');
         topKoltsKez.style.height = '20px';
+        topKoltsKez.style.position = 'relative';
         topKoltsKez.appendChild(massExportButton);
         topKoltsKez.style.padding = "2px 0px";
+        topKoltsKez.children[0].style.position = "absolute";
+        topKoltsKez.children[0].style.top = "50%";
+        topKoltsKez.children[0].style.transform = "translateY(-50%)";
 
         var massExport = function () {
             let ajanlatokLista = "#maindiv > div:nth-child(1) > div:nth-child(1) > form:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div";
@@ -566,8 +482,9 @@
                 if(element.className.includes("selected")){
                     selectedAjanlatIndex.push(index);
 
-                    let selectedAjanlatIDLookup = (ajanlatokLista + ":nth-child(" + (index+1) + ")" + "> table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(4) > div:nth-child(1) > a").toString();
+                    let selectedAjanlatIDLookup = (ajanlatokLista + ":nth-child(" + (index+1) + ")" + "> table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(10) > div:nth-child(1) > a").toString();
 
+                    // let selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
                     let selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
 
                     selectedAjanlatLink.push("https://www.etalon.terc.hu/file/dl/" + selectedAjanlatID + "/PDF/2/1/1/1/2/HUF/1/1/1/1/1/2/1/");
@@ -614,9 +531,30 @@
 
         massExportButton.addEventListener('click', massExport);
 
+        massExportCheckbox = document.querySelector('#altalanos-export-all-lehetsg-megjelentse');
+        
+        
+        // initializing massexportbutton
+        let mx = 0;
+        while (mx == 0) {
+            if (massExportCheckbox.checked){
+                massExportButton.style.display = 'inline-block';
+            } else if (!massExportCheckbox.checked){
+                massExportButton.style.display = 'none';
+            }
+            mx++           
+        }
+
+        massExportCheckbox.addEventListener('change', function() {
+            if (massExportCheckbox.checked){
+                massExportButton.style.display = 'inline-block';
+            } else if (!massExportCheckbox.checked){
+                massExportButton.style.display = 'none';
+            }
+        });
 
 
-        /*<---------------------------------------- HIDE ON OPEN -------------------------------------------------------------------------------------->*/
+        /*<---------------------------------------- FRESH PAGE -------------------------------------------------------------------------------------->*/
 
 
         var currentPage = "";
@@ -639,14 +577,12 @@
                 // checkCheckboxStateAndToggleButton();
                 // toggleInlineBlock();
 
-                showHideButton.style.visibility = "hidden";
+                showHideButton.style.display = "none";
                 topKoltsKez.style.padding = "2px 0px";
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
             }
-
-            //var szumInterval;
 
             if ((lastPage == "frontPage") && (currentPage == "innerPage")){             // kívülről befele váltás
                 
@@ -654,19 +590,19 @@
 
                 buttonRearrangement();
 
-                toggleRigtMenuRow();
-
                 let leftPanelTetelekCsoportositasa = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)');
 
-                if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible')) && leftPanelTetelekCsoportositasa.is(':visible')){
+
+                if ((tetelekCsoportositasaCheckbox.checked) && !(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
                     jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)').click();
-                };
+                }
 
-                //szumOfAll;
-
-                // massExportButton.style.visibility = "transparent";
-
-                showHideButton.style.display = "block";
+                if ((showHideCheckbox.checked) && (showHideButton.style.display == "none")){
+                    showHideButton.style.display = 'block';                        
+                    toggleRigtMenuRow();
+                } else if (!showHideCheckbox.checked){
+                    showHideButton.style.display = 'none';
+                }
 
                 jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                 jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
