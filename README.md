@@ -38,11 +38,11 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 
 **TERC Plus menü**<br>
 <picture>
-<img alt="TERC Plus menü" src="img/terc_plus_menu.png">
+<img alt="TERC Plus menü" src="img/terc_plus_menu.png"><br>
 </picture>
 **Export All gomb**<br>
 <picture>
-<img alt="Export All gomb" src="img/terc_plus_export_all_button.png">
+<img alt="Export All gomb" src="img/terc_plus_export_all_button.png"><br>
 </picture>
 **Minden menügombbal**<br>
 <picture>
