@@ -251,7 +251,6 @@
             contentDiv.style.borderRadius = '0'; // Set border radius to 0
             contentDiv.style.backgroundColor = 'transparent'; // Set background to transparent
             contentDiv.style.marginTop = '0'; // Remove top margin
-            // Remove height property
             return contentDiv;
         }
 
@@ -390,11 +389,9 @@
 
             if (!(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
                 if ((jQuery('.tu-header-cont > div:nth-child(6)').is(':visible')) || (jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').is(':visible')) || (jQuery('#tu-header-login').is(':visible'))){
-
                     jQuery('.tu-header-cont > div:nth-child(6)').hide();                        // centerdiv
                     jQuery('.tu-header-cont > div:nth-child(1) > img:nth-child(1)').hide();     // terc img
                     jQuery('#tu-header-login').hide();                                          // email
-
                 }
 
                 if(!document.querySelector('.tu-header-cont > div:nth-child(1)').innerHTML.includes('SZERKESZTÉS:')){
@@ -486,8 +483,6 @@
                     let selectedAjanlatID = document.querySelector(selectedAjanlatIDLookup).onclick.toString().match(/(\d(\d?)*\d)/)[0].toString();
 
                     selectedAjanlatLink.push("https://www.etalon.terc.hu/file/dl/" + selectedAjanlatID + "/PDF/2/1/1/1/2/HUF/1/1/1/1/1/2/1/");
-
-                    //window.open(selectedAjanlatLink);
                 }
             });
 
@@ -570,9 +565,6 @@
             }
 
             if ((lastPage == "") && (currentPage == "frontPage")){
-                
-                // checkCheckboxStateAndToggleButton();
-                // toggleInlineBlock();
 
                 showHideButton.style.display = "none";
                 topKoltsKez.style.padding = "2px 0px";
