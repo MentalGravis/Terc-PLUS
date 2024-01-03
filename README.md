@@ -35,6 +35,15 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 
 # Képek
 
+
+**TERC Plus menü**<br>
+<picture>
+<img alt="TERC Plus menü" src="img/terc_plus_menu.png">
+</picture>
+**Export All gomb**<br>
+<picture>
+<img alt="Export All gomb" src="img/terc_plus_export_all_button.png">
+</picture>
 **Minden menügombbal**<br>
 <picture>
 <img alt="Minden menügombbal" src="img/menu_with_buttons.png"><br>
