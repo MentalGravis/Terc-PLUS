@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Terc PLUS
 // @namespace    http://tampermonkey.net/
-// @version      2.4.1
+// @version      2.4.2
 // @description  Különböző funkciókkal bővíti a TERC-Etalon webalkalmazást
 // @author       Mental Gravis
 // @match        https://www.etalon.terc.hu/browser
@@ -449,7 +449,7 @@
 
         // Set button styles
         massExportButton.style.position = 'relative';
-        massExportButton.style.left = '276px';
+        massExportButton.style.left = '411px';
         massExportButton.style.zIndex = "9999";
         massExportButton.style.cursor = "pointer";
         massExportButton.style.fontSize = "11px";
