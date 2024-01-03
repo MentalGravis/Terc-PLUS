@@ -46,8 +46,8 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 </picture><br>
 **Minden menügombbal**<br>
 <picture>
-<img alt="Minden menügombbal" src="img/menu_with_buttons.png"><br>
-</picture>
+<img alt="Minden menügombbal" src="img/menu_with_buttons.png">
+</picture><br>
 Csak az **Összesítők fedlapok** és a **Vissza** gombokkal<br>
 <picture>
 <img alt="Csak az Összesítők fedlapok és a Vissza gombokkal" src="img/menu_without_buttons.png">
