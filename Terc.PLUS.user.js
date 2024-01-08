@@ -128,7 +128,6 @@
         createNumberInput(altalanos, 'Rezsioradij input', '0', 'Rezsióradíj:');
 
 
-
         // const content2 = createContentDiv('content2');
         // createCheckbox(content2, 'Option A');
         // createCheckbox(content2, 'Option B');
@@ -216,7 +215,6 @@
             }
         }
 
-
         function createDropdown(container, label, options, defaultValue, checkboxLabel) {
             // Create the dropdown element
             const dropdown = document.createElement('select');
@@ -268,7 +266,6 @@
             return null;
         }
 
-
         // Function to generate dropdown ID based on container ID and label
         function generateDropdownID(containerID, label) {
             const sanitizedLabel = label.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase();
@@ -304,6 +301,7 @@
             numberInput.id = generateInputID(container.id, label);
             numberInput.style.textAlign = 'right';
             numberInput.style.width = '80px';
+            numberInput.style.paddingTop = '2px';
         
             // Check if user state is available, otherwise use default
             const inputValue = userInputState[numberInput.id] !== undefined ? userInputState[numberInput.id] : defaultValue;
@@ -709,6 +707,57 @@
         document.querySelector('#altalanos-jelleg').style.marginLeft = document.querySelector('#altalanos-ptmny-tulajdonsga').style.marginLeft = document.querySelector('#altalanos-rezsiradj').style.marginLeft = '40px';
         document.querySelector('#altalanos > label:nth-child(18)').style.marginRight = document.querySelector('#altalanos > label:nth-child(23)').style.marginRight = document.querySelector('#altalanos > label:nth-child(28)').style.marginRight = '5px';
 
+
+        // Mutation observer
+    function setupDOMObserver(targetClass, targetTextContent, callbackFunctions) {
+        // Define the target node to observe
+        const targetNode = document.body;
+
+        // Options for the observer (specify which mutations to observe)
+        const config = { attributes: true, childList: true, subtree: true };
+
+        // Callback function to execute when mutations are observed
+        const callback = function(mutationsList, observer) {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    // Check for specific changes based on text content and class
+                    const addedNode = mutation.addedNodes[0];
+
+                    if (
+                        addedNode.nodeType === 3 &&
+                        addedNode.nodeValue.trim() === targetTextContent &&
+                        addedNode.parentElement.classList.contains(targetClass)
+                    ) {
+                        // Trigger each callback function with a delay
+                        callbackFunctions.forEach((func, index) => {
+                            setTimeout(func, index * 1000); // Adjust the delay (in milliseconds) between function calls
+                        });
+                    }
+                }
+            }
+        };
+
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback);
+
+        // Start observing the target node for configured mutations
+        observer.observe(targetNode, config);
+        }
+
+        // Example usage with multiple callback functions
+        const function1 = function() {
+            alert('Callback Function 1');
+        };
+
+        const function2 = function() {
+            alert('Callback Function 2');
+        };
+
+        setupDOMObserver('your-target-class', 'Your target text content', [function1, function2]);
+
+
+
+        
         /*<---------------------------------------- FRESH PAGE -------------------------------------------------------------------------------------->*/
 
         var currentPage = "";
@@ -744,7 +793,7 @@
 
                 buttonRearrangement();
 
-                let leftPanelTetelekCsoportositasa = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)');
+                //let leftPanelTetelekCsoportositasa = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)');
 
 
                 if ((tetelekCsoportositasaCheckbox.checked) && !(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
