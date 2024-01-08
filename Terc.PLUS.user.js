@@ -114,6 +114,10 @@
         createCheckbox(altalanos, 'Menügombok automatikus elrejtése', true); // Default value set to true
         createCheckbox(altalanos, 'Tételek csoportosításának elrejtése', true);
         createCheckbox(altalanos, '\"Export All\" lehetőség megjelenítése', true);
+        createCheckbox(altalanos, 'Új költségvetés készítésénél alapértelmezett adatok beállítása', true);
+        createCheckbox(altalanos, 'Jelleg: ', true);
+        createCheckbox(altalanos, 'Építmény tulajdonsága: ', true);
+        createCheckbox(altalanos, 'Rezsióradíj: ', true);
 
         // const content2 = createContentDiv('content2');
         // createCheckbox(content2, 'Option A');
@@ -145,6 +149,7 @@
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.id = generateCheckboxID(container.id, label);
+            //checkbox.style.marginLeft = '0px';
             const labelElement = document.createElement('label');
             labelElement.textContent = label;
             labelElement.htmlFor = checkbox.id;
@@ -197,6 +202,75 @@
                 const checkbox = document.getElementById(checkboxID);
                 if (checkbox) {
                     checkbox.checked = state[checkboxID];
+                }
+            }
+        }
+
+
+
+        function createDropdown(container, label, options, defaultValue) {
+            // Create label for the dropdown
+            const labelElement = document.createElement('div');
+            labelElement.textContent = label;
+            labelElement.style.fontWeight = 'bold';
+            labelElement.style.color = '#15428b';
+            labelElement.style.marginTop = '10px';
+        
+            // Create the dropdown element
+            const dropdown = document.createElement('select');
+            dropdown.id = generateDropdownID(container.id, label);
+        
+            // Create and append options to the dropdown
+            options.forEach(optionText => {
+                const option = document.createElement('option');
+                option.value = optionText;
+                option.textContent = optionText;
+                dropdown.appendChild(option);
+            });
+        
+            // Check if user state is available, otherwise use default
+            const selectedValue = userDropdownState[dropdown.id] !== undefined ? userDropdownState[dropdown.id] : defaultValue;
+        
+            // Set the selected value for the dropdown
+            dropdown.value = selectedValue;
+        
+            // Save default value
+            defaultDropdownState[dropdown.id] = defaultValue;
+        
+            // Add change event listener to save user state
+            dropdown.addEventListener('change', function() {
+                userDropdownState[dropdown.id] = dropdown.value;
+                saveDropdownState('user_dropdownState', userDropdownState);
+            });
+        
+            // Append the label and dropdown to the container
+            container.appendChild(labelElement);
+            container.appendChild(dropdown);
+        }
+        
+        // Function to generate dropdown ID based on container ID and label
+        function generateDropdownID(containerID, label) {
+            const sanitizedLabel = label.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase();
+            return `${containerID}-${sanitizedLabel}`;
+        }
+        
+        // Function to load dropdown state from local storage
+        function loadDropdownState(key) {
+            const storedState = localStorage.getItem(key);
+            return storedState ? JSON.parse(storedState) : {};
+        }
+        
+        // Function to save dropdown state to local storage
+        function saveDropdownState(key, state) {
+            localStorage.setItem(key, JSON.stringify(state));
+        }
+        
+        // Function to apply dropdown state to dropdowns
+        function applyDropdownState(state) {
+            for (const dropdownID in state) {
+                const dropdown = document.getElementById(dropdownID);
+                if (dropdown) {
+                    dropdown.value = state[dropdownID];
                 }
             }
         }
@@ -535,7 +609,7 @@
             } else if (!massExportCheckbox.checked){
                 massExportButton.style.display = 'none';
             }
-            mx++           
+            mx++;
         }
 
         massExportCheckbox.addEventListener('change', function() {
@@ -547,6 +621,11 @@
         });
 
         /*<---------------------------------------- NEW BUDGET ESTIMATES AUTOFILL -------------------------------------------------------------------------------------->*/
+
+        document.querySelector('#altalanos-jelleg-').style.marginLeft = '40px';
+        document.querySelector('#altalanos-ptmny-tulajdonsga-').style.marginLeft = '40px';
+        document.querySelector('#altalanos-rezsiradj-').style.marginLeft = '40px';
+
 
         /*<---------------------------------------- FRESH PAGE -------------------------------------------------------------------------------------->*/
 
