@@ -106,8 +106,12 @@
         // Load checkbox states from local storage
         const defaultCheckboxState = loadCheckboxState('default_checkboxState');
         const userCheckboxState = loadCheckboxState('user_checkboxState');
+        const defaultDropdownState = loadDropdownState('default_dropdownState');
+        const userDropdownState = loadDropdownState('user_dropdownState');
+        const defaultUserInputState = loadUserInputState('user_inputState');
+        const userInputState = loadUserInputState('user_inputState');
 
-        console.log(userCheckboxState);
+        // console.log(userCheckboxState);
         
         // Create content divs for each tab with checkboxes---------------------------------------------------menüopciók---------------------------------------->
         const altalanos = createContentDiv('altalanos');
@@ -115,9 +119,15 @@
         createCheckbox(altalanos, 'Tételek csoportosításának elrejtése', true);
         createCheckbox(altalanos, '\"Export All\" lehetőség megjelenítése', true);
         createCheckbox(altalanos, 'Új költségvetés készítésénél alapértelmezett adatok beállítása', true);
-        createCheckbox(altalanos, 'Jelleg: ', true);
-        createCheckbox(altalanos, 'Építmény tulajdonsága: ', true);
-        createCheckbox(altalanos, 'Rezsióradíj: ', true);
+        createCheckbox(altalanos, 'Jelleg:', true);        
+        createDropdown(altalanos, 'Jelleg dropdown', ['Új', 'Felújítás'], 'Felújítás', 'Jelleg:');
+        createCheckbox(altalanos, 'Építmény tulajdonsága:', true);
+        let építményekTulList = ['Egylakásos lakóépület', 'Két és többlakásos lakóépület', 'Közösségi lakóépület', 'Szálloda', 'Hivatali épület', 'Nagy- és kiskereskedelmi épület', 'Közlekedési és hírközlési épület', 'Ipari épület, raktár', 'Szórakoztató célú épület', 'Közművelődési célú épület', 'Oktatási célú épület', 'Egészségügyi célú épület', 'Egyéb nem lakóépület', 'Út', 'Vasút', 'Komplex ipari létesítmény', 'Sport és üdülési célú építmény', 'Egyéb építmény'];
+        createDropdown(altalanos, 'Építmény tulajdonsága dropdown', építményekTulList, 'Hivatali épület', 'Építmény tulajdonsága:');
+        createCheckbox(altalanos, 'Rezsióradíj:', false);
+        createNumberInput(altalanos, 'Rezsioradij input', '0', 'Rezsióradíj:');
+
+
 
         // const content2 = createContentDiv('content2');
         // createCheckbox(content2, 'Option A');
@@ -153,7 +163,7 @@
             const labelElement = document.createElement('label');
             labelElement.textContent = label;
             labelElement.htmlFor = checkbox.id;
-            labelElement.style.padding = "5px 10px 5px 5px";
+            labelElement.style.padding = "5px 5px 5px 5px";
             labelElement.style.marginTop = "10px";
             const spacing = document.createElement('div');
             spacing.style.margin = 0;
@@ -207,15 +217,7 @@
         }
 
 
-
-        function createDropdown(container, label, options, defaultValue) {
-            // Create label for the dropdown
-            const labelElement = document.createElement('div');
-            labelElement.textContent = label;
-            labelElement.style.fontWeight = 'bold';
-            labelElement.style.color = '#15428b';
-            labelElement.style.marginTop = '10px';
-        
+        function createDropdown(container, label, options, defaultValue, checkboxLabel) {
             // Create the dropdown element
             const dropdown = document.createElement('select');
             dropdown.id = generateDropdownID(container.id, label);
@@ -243,11 +245,30 @@
                 saveDropdownState('user_dropdownState', userDropdownState);
             });
         
-            // Append the label and dropdown to the container
-            container.appendChild(labelElement);
-            container.appendChild(dropdown);
+            // Find the checkbox label element
+            const checkboxLabelElement = findCheckboxLabelElement(container, checkboxLabel);
+        
+            if (checkboxLabelElement) {
+                // Append the dropdown immediately after the checkbox label
+                checkboxLabelElement.parentNode.insertBefore(dropdown, checkboxLabelElement.nextSibling);
+            } else {
+                // If checkbox label is not found, simply append the dropdown to the container
+                container.appendChild(dropdown);
+            }
         }
         
+        // Function to find a checkbox label element based on its text content within a container
+        function findCheckboxLabelElement(container, checkboxLabel) {
+            const labels = container.querySelectorAll('label');
+            for (const label of labels) {
+                if (label.textContent.trim() === checkboxLabel.trim()) {
+                    return label;
+                }
+            }
+            return null;
+        }
+
+
         // Function to generate dropdown ID based on container ID and label
         function generateDropdownID(containerID, label) {
             const sanitizedLabel = label.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase();
@@ -271,6 +292,69 @@
                 const dropdown = document.getElementById(dropdownID);
                 if (dropdown) {
                     dropdown.value = state[dropdownID];
+                }
+            }
+        }
+
+        function createNumberInput(container, label, defaultValue, checkboxLabel) {
+            // Create the number input element
+            const numberInput = document.createElement('input');
+            numberInput.type = 'text';
+            numberInput.pattern = '\\d*'; // Allow only numbers
+            numberInput.id = generateInputID(container.id, label);
+            numberInput.style.textAlign = 'right';
+            numberInput.style.width = '80px';
+        
+            // Check if user state is available, otherwise use default
+            const inputValue = userInputState[numberInput.id] !== undefined ? userInputState[numberInput.id] : defaultValue;
+        
+            // Set the input value
+            numberInput.value = inputValue;
+        
+            // Save default value
+            defaultUserInputState[numberInput.id] = defaultValue;
+        
+            // Add input event listener to save user state
+            numberInput.addEventListener('input', function() {
+                userInputState[numberInput.id] = numberInput.value;
+                saveUserInputState('user_inputState', userInputState);
+            });
+        
+            // Find the checkbox label element
+            const checkboxLabelElement = findCheckboxLabelElement(container, checkboxLabel);
+        
+            if (checkboxLabelElement) {
+                // Append the number input immediately after the checkbox label
+                checkboxLabelElement.parentNode.insertBefore(numberInput, checkboxLabelElement.nextSibling);
+            } else {
+                // If checkbox label is not found, simply append the number input to the container
+                container.appendChild(numberInput);
+            }
+        }
+        
+        // Function to generate input ID based on container ID and label
+        function generateInputID(containerID, label) {
+            const sanitizedLabel = label.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase();
+            return `${containerID}-${sanitizedLabel}-input`;
+        }
+        
+        // Function to load user input state from local storage
+        function loadUserInputState(key) {
+            const storedState = localStorage.getItem(key);
+            return storedState ? JSON.parse(storedState) : {};
+        }
+        
+        // Function to save user input state to local storage
+        function saveUserInputState(key, state) {
+            localStorage.setItem(key, JSON.stringify(state));
+        }
+        
+        // Function to apply user input state to inputs
+        function applyUserInputState(state) {
+            for (const inputID in state) {
+                const input = document.getElementById(inputID);
+                if (input) {
+                    input.value = state[inputID];
                 }
             }
         }
@@ -622,10 +706,8 @@
 
         /*<---------------------------------------- NEW BUDGET ESTIMATES AUTOFILL -------------------------------------------------------------------------------------->*/
 
-        document.querySelector('#altalanos-jelleg-').style.marginLeft = '40px';
-        document.querySelector('#altalanos-ptmny-tulajdonsga-').style.marginLeft = '40px';
-        document.querySelector('#altalanos-rezsiradj-').style.marginLeft = '40px';
-
+        document.querySelector('#altalanos-jelleg').style.marginLeft = document.querySelector('#altalanos-ptmny-tulajdonsga').style.marginLeft = document.querySelector('#altalanos-rezsiradj').style.marginLeft = '40px';
+        document.querySelector('#altalanos > label:nth-child(18)').style.marginRight = document.querySelector('#altalanos > label:nth-child(23)').style.marginRight = document.querySelector('#altalanos > label:nth-child(28)').style.marginRight = '5px';
 
         /*<---------------------------------------- FRESH PAGE -------------------------------------------------------------------------------------->*/
 
