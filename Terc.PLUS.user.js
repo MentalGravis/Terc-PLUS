@@ -709,51 +709,80 @@
 
 
         // Mutation observer
-    function setupDOMObserver(targetClass, targetTextContent, callbackFunctions) {
-        // Define the target node to observe
-        const targetNode = document.body;
-
-        // Options for the observer (specify which mutations to observe)
-        const config = { attributes: true, childList: true, subtree: true };
-
-        // Callback function to execute when mutations are observed
-        const callback = function(mutationsList, observer) {
-            for (const mutation of mutationsList) {
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    // Check for specific changes based on text content and class
-                    const addedNode = mutation.addedNodes[0];
-
-                    if (
-                        addedNode.nodeType === 3 &&
-                        addedNode.nodeValue.trim() === targetTextContent &&
-                        addedNode.parentElement.classList.contains(targetClass)
-                    ) {
-                        // Trigger each callback function with a delay
-                        callbackFunctions.forEach((func, index) => {
-                            setTimeout(func, index * 1000); // Adjust the delay (in milliseconds) between function calls
-                        });
+        function setupDOMObserver(targetClass, targetTextContent, callbackFunctions) {
+            // Define the target node to observe
+            const targetNode = document.body;
+        
+            // Options for the observer (specify which mutations to observe)
+            const config = { attributes: true, childList: true, subtree: true, passive: true };
+        
+            // Callback function to execute when mutations are observed
+            const callback = function(mutationsList, observer) {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        // Check for specific changes based on text content and class
+                        const addedNode = mutation.addedNodes[0];
+            
+                        if (
+                            addedNode.nodeType === 3 &&
+                            addedNode.nodeValue.trim() === targetTextContent &&
+                            (addedNode.parentElement && addedNode.parentElement.classList && addedNode.parentElement.classList.contains(targetClass))
+                        ) {
+                            // // Trigger each callback function with a delay
+                            // callbackFunctions.forEach((func, index) => {
+                            //     setTimeout(() => func(addedNode.parentElement), (index + 1) * 3000); // Adjust the delay (in milliseconds) between function calls
+                            // });
+                            callbackFunctions(addedNode.parentElement);
+                        }
                     }
                 }
+            };
+        
+            // Create an observer instance linked to the callback function
+            const observer = new MutationObserver(callback);
+        
+            // Start observing the target node for configured mutations
+            observer.observe(targetNode, config);
+        }
+        
+        var jelleg = function(elem) {
+            // alert(elem.classList);
+            var jellegUserValue = document.querySelector('#altalanos-jelleg-dropdown').value.toString();
+            // console.log(jellegUserValue);
+            var ujKoltsegAblak = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
+            var jellegDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[6].children[1].children[0].children[1];
+            if (jellegDropdown.value != jellegUserValue) {
+                setupDOMObserver('x-combo-list-item', jellegUserValue, csinald);
+                jellegDropdown.addEventListener('click', function() {
+                    console.log('eventlistener fired');
+                });
+                setTimeout(jellegDropdown.click(), 300);
+                
             }
         };
-
-        // Create an observer instance linked to the callback function
-        const observer = new MutationObserver(callback);
-
-        // Start observing the target node for configured mutations
-        observer.observe(targetNode, config);
-        }
-
-        // Example usage with multiple callback functions
-        const function1 = function() {
-            alert('Callback Function 1');
+        
+        var csinald = function(elem) {
+            console.log('jellegValasztasClick fired off ' + elem)
         };
 
-        const function2 = function() {
-            alert('Callback Function 2');
-        };
+        // var epitmenyClick = function () {
+        //     alert('Callback function 3');
+        // };
 
-        setupDOMObserver('your-target-class', 'Your target text content', [function1, function2]);
+        // var epitmenyValasztas = function () {
+        //     alert('Callback function 4');
+        // };
+
+        // var letrehozasClick = function () {
+        //     alert('Callback function 5');
+        // };
+
+        // var letrehozasClick = function (elem) {
+        //     var ujKoltsegAblak = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
+        //     alert(ujKoltsegAblak.className);
+        // };
+
+        setupDOMObserver('x-window-header-text', 'Új költségvetés létrehozása', jelleg);
 
 
 
