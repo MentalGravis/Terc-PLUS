@@ -748,15 +748,18 @@
         var jelleg = function(elem) {
             // alert(elem.classList);
             var jellegUserValue = document.querySelector('#altalanos-jelleg-dropdown').value.toString();
-            // console.log(jellegUserValue);
+            console.log(jellegUserValue);
             var ujKoltsegAblak = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
             var jellegDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[6].children[1].children[0].children[1];
             if (jellegDropdown.value != jellegUserValue) {
-                setupDOMObserver('x-combo-list-item', jellegUserValue, csinald);
                 jellegDropdown.addEventListener('click', function() {
-                    console.log('eventlistener fired');
+                    document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
+                        if(element == jellegUserValue){
+                            setTimeout(element.click(), 100);
+                        }
+                    }, {passive: true});
                 });
-                setTimeout(jellegDropdown.click(), 300);
+                jellegDropdown.click();
                 
             }
         };
