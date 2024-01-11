@@ -5,19 +5,6 @@ Terc felhasználói felület javítása
 
 <br>
 
-# Funkciók
-
-1. Az *"Összes munkanem"* szöveg helyén az ajánlat teljes ára található, amit az *"Anyag összesen"* és *"Díj összesen"* számok összeadásából számol ki
-1. A *"SZERKESZTÉS:{adott projekt címe}"* felkerül a fejlécbe
-1. Az előbbi érdekében mind a Terc-etalon logó, mind a középső terc.hu-ra mutató hivatkozás, mind az email elrejtésre került
-1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
-1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek (alapból elrejtve)
-1. *"Tételek csoportosítása"* ablak automatikus becsukása
-1. Tömeges export: *"Export All"* gomb megnyomása után minden kijelölt elemet exportál (folyamatos beállításon)
-1. Lebegő menü, minek segítségével az egyes funkciókat ki/be lehet kapcsolni
-
-<br>
-
 # Telepítés
 
 A szkript a legtöbb modern böngészőre telepíthető.<br>
@@ -30,6 +17,20 @@ A szkript a legtöbb modern böngészőre telepíthető.<br>
 1. A megjelenő oldalon kattints az **Install** gombra.
 1. Lépj be a Terc-etalon-ba, és használd egészséggel.
 
+
+<br>
+
+# Funkciók
+
+1. Az *"Összes munkanem"* szöveg helyén az ajánlat teljes ára található, amit az *"Anyag összesen"* és *"Díj összesen"* számok összeadásából számol ki
+1. A *"SZERKESZTÉS:{adott projekt címe}"* felkerül a fejlécbe
+1. Az előbbi érdekében mind a Terc-etalon logó, mind a középső terc.hu-ra mutató hivatkozás, mind az email elrejtésre került
+1. A cím helyére bekerültek azok a vezérlőgombok, melyek ettől jobbra helyezkednek el
+1. Egy bal felső sarokban található gombbal elrejthető/megjeleníthető az *"Összesítők fedlapok"* és a *"Visszalépés"* gombokon kívüli vezérlőelemek (alapból elrejtve)
+1. *"Tételek csoportosítása"* ablak automatikus becsukása
+1. Tömeges export: *"Export All"* gomb megnyomása után minden kijelölt elemet exportál (folyamatos beállításon)
+1. Lebegő menü, minek segítségével az egyes funkciókat ki/be lehet kapcsolni
+1. Új költségvetés létrehozásánál alapértelmezett értékek automatikus kitöltése
 
 <br>
 
@@ -84,5 +85,3 @@ Ha új hibát észlelsz, vagy új funkció beépítésére szeretnél ajánlatot
             * gyakran sok tétel egyesült ára jelenik meg, melyet érdemes szétosztani
 1. ["Fontos" label költségvetésre, ami alapján mindig első helyen jelenik meg](https://github.com/MentalGravis/Terc-PLUS/issues/12)
 1. [Saját adattár nem K tételét megpróbálja megtalálni öntételben](https://github.com/MentalGravis/Terc-PLUS/issues/13)
-1. [Új költségvetés létrehozásánál default értékek automatikus kitöltése](https://github.com/MentalGravis/Terc-PLUS/issues/18)
-    * default értékek menüben állíthatóak be
