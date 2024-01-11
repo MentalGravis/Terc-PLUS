@@ -739,15 +739,26 @@
             };
         
             // Create an observer instance linked to the callback function
-            const observer = new MutationObserver(callback);
+            var observer = new MutationObserver(callback);
         
             // Start observing the target node for configured mutations
-            observer.observe(targetNode, config);
+            var newKoltsChex = document.querySelector("#altalanos-j-kltsgvets-ksztsnl-alaprtelmezett-adatok-belltsa");
+            if (newKoltsChex.checked) {
+                observer.observe(targetNode, config);    
+            }
+            newKoltsChex.addEventListener('change', function(){
+                if (newKoltsChex.checked) {
+                    observer.observe(targetNode, config);
+                } else {
+                    observer.disconnect();
+                }
+            })
         }
         
         var jelleg = function(elem) {
             // alert(elem.classList);
             var ujKoltsegAblak = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
+            
             if (document.querySelector("#altalanos-jelleg").checked) {
                 var jellegUserValue = document.querySelector('#altalanos-jelleg-dropdown').value.toString();
                 var jellegDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[6].children[1].children[0].children[1];
@@ -757,8 +768,8 @@
                             if(element.innerHTML == jellegUserValue){
                                 element.click();
                             }
-                        }, {passive: true});
-                    });
+                        });
+                    }, {once: true}, {passive: true});
                     jellegDropdown.click();
                 }                
             }
@@ -766,44 +777,32 @@
                 var epitmenyUserValue = document.querySelector("#altalanos-ptmny-tulajdonsga-dropdown").value.toString();
                 var epitmenyDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[7].children[1].children[0].children[1];
                 if (epitmenyDropdown.value != epitmenyUserValue) {
-                    epitmenyDropdown.addEventListener('click', function() {
-                        document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
-                            if(element.innerHTML == epitmenyUserValue){
-                                element.click();
-                            }
-                        }, {passive: true});
-                    });
-                    epitmenyDropdown.click();
+                    epitmenyDropdown.addEventListener('click', function() {setTimeout(()=>{
+                            document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
+                                if(element.innerHTML == epitmenyUserValue){
+                                    element.click();
+                                }
+                            });
+                        }, 300);
+                    }, {once: true}, {passive: true});
+                    setTimeout(epitmenyDropdown.click(), 100);
+                }
+            }
+
+            if (document.querySelector("#altalanos-rezsiradj").checked) {
+                var rezsioraUserInput = document.querySelector("#altalanos-rezsioradij-input-input").value;
+                if (rezsioraUserInput.length > 0) {
+                    var rezsioraUserNumber = Number(document.querySelector("#altalanos-rezsioradij-input-input").value);
+                    document.querySelector("input[name=lessonfee]").value=rezsioraUserNumber;
                 }
             }
         };
-        
-        // var csinald = function(elem) {
-        //     console.log('jellegValasztasClick fired off ' + elem)
-        // };
+        var newKoltsChex = document.querySelector("#altalanos-j-kltsgvets-ksztsnl-alaprtelmezett-adatok-belltsa");
+        if (newKoltsChex.checked) {
+            setupDOMObserver('x-window-header-text', 'Új költségvetés létrehozása', jelleg);    
+        }
 
-        // var epitmenyClick = function () {
-        //     alert('Callback function 3');
-        // };
-
-        // var epitmenyValasztas = function () {
-        //     alert('Callback function 4');
-        // };
-
-        // var letrehozasClick = function () {
-        //     alert('Callback function 5');
-        // };
-
-        // var letrehozasClick = function (elem) {
-        //     var ujKoltsegAblak = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
-        //     alert(ujKoltsegAblak.className);
-        // };
-
-        setupDOMObserver('x-window-header-text', 'Új költségvetés létrehozása', jelleg);
-
-
-
-        
+                
         /*<---------------------------------------- FRESH PAGE -------------------------------------------------------------------------------------->*/
 
         var currentPage = "";
