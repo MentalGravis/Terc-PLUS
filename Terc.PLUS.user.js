@@ -118,10 +118,10 @@
         createCheckbox(altalanos, 'Menügombok automatikus elrejtése', true); // Default value set to true
         createCheckbox(altalanos, 'Tételek csoportosításának elrejtése', true);
         createCheckbox(altalanos, '\"Export All\" lehetőség megjelenítése', true);
-        createCheckbox(altalanos, 'Új költségvetés készítésénél alapértelmezett adatok beállítása', true);
-        createCheckbox(altalanos, 'Jelleg:', true);        
+        createCheckbox(altalanos, 'Új költségvetés készítésénél alapértelmezett adatok beállítása', false);
+        createCheckbox(altalanos, 'Jelleg:', false);        
         createDropdown(altalanos, 'Jelleg dropdown', ['Új', 'Felújítás'], 'Felújítás', 'Jelleg:');
-        createCheckbox(altalanos, 'Építmény tulajdonsága:', true);
+        createCheckbox(altalanos, 'Építmény tulajdonsága:', false);
         let építményekTulList = ['Egylakásos lakóépület', 'Két és többlakásos lakóépület', 'Közösségi lakóépület', 'Szálloda', 'Hivatali épület', 'Nagy- és kiskereskedelmi épület', 'Közlekedési és hírközlési épület', 'Ipari épület, raktár', 'Szórakoztató célú épület', 'Közművelődési célú épület', 'Oktatási célú épület', 'Egészségügyi célú épület', 'Egyéb nem lakóépület', 'Út', 'Vasút', 'Komplex ipari létesítmény', 'Sport és üdülési célú építmény', 'Egyéb építmény'];
         createDropdown(altalanos, 'Építmény tulajdonsága dropdown', építményekTulList, 'Hivatali épület', 'Építmény tulajdonsága:');
         createCheckbox(altalanos, 'Rezsióradíj:', false);
