@@ -747,26 +747,40 @@
         
         var jelleg = function(elem) {
             // alert(elem.classList);
-            var jellegUserValue = document.querySelector('#altalanos-jelleg-dropdown').value.toString();
-            console.log(jellegUserValue);
             var ujKoltsegAblak = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
-            var jellegDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[6].children[1].children[0].children[1];
-            if (jellegDropdown.value != jellegUserValue) {
-                jellegDropdown.addEventListener('click', function() {
-                    document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
-                        if(element == jellegUserValue){
-                            setTimeout(element.click(), 100);
-                        }
-                    }, {passive: true});
-                });
-                jellegDropdown.click();
-                
+            if (document.querySelector("#altalanos-jelleg").checked) {
+                var jellegUserValue = document.querySelector('#altalanos-jelleg-dropdown').value.toString();
+                var jellegDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[6].children[1].children[0].children[1];
+                if (jellegDropdown.value != jellegUserValue) {
+                    jellegDropdown.addEventListener('click', function() {
+                        document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
+                            if(element.innerHTML == jellegUserValue){
+                                element.click();
+                            }
+                        }, {passive: true});
+                    });
+                    jellegDropdown.click();
+                }                
+            }
+            if (document.querySelector("#altalanos-ptmny-tulajdonsga").checked) {
+                var epitmenyUserValue = document.querySelector("#altalanos-ptmny-tulajdonsga-dropdown").value.toString();
+                var epitmenyDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[7].children[1].children[0].children[1];
+                if (epitmenyDropdown.value != epitmenyUserValue) {
+                    epitmenyDropdown.addEventListener('click', function() {
+                        document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
+                            if(element.innerHTML == epitmenyUserValue){
+                                element.click();
+                            }
+                        }, {passive: true});
+                    });
+                    epitmenyDropdown.click();
+                }
             }
         };
         
-        var csinald = function(elem) {
-            console.log('jellegValasztasClick fired off ' + elem)
-        };
+        // var csinald = function(elem) {
+        //     console.log('jellegValasztasClick fired off ' + elem)
+        // };
 
         // var epitmenyClick = function () {
         //     alert('Callback function 3');
