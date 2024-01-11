@@ -106,14 +106,27 @@
         // Load checkbox states from local storage
         const defaultCheckboxState = loadCheckboxState('default_checkboxState');
         const userCheckboxState = loadCheckboxState('user_checkboxState');
+        const defaultDropdownState = loadDropdownState('default_dropdownState');
+        const userDropdownState = loadDropdownState('user_dropdownState');
+        const defaultUserInputState = loadUserInputState('user_inputState');
+        const userInputState = loadUserInputState('user_inputState');
 
-        console.log(userCheckboxState);
+        // console.log(userCheckboxState);
         
         // Create content divs for each tab with checkboxes---------------------------------------------------menüopciók---------------------------------------->
         const altalanos = createContentDiv('altalanos');
         createCheckbox(altalanos, 'Menügombok automatikus elrejtése', true); // Default value set to true
         createCheckbox(altalanos, 'Tételek csoportosításának elrejtése', true);
         createCheckbox(altalanos, '\"Export All\" lehetőség megjelenítése', true);
+        createCheckbox(altalanos, 'Új költségvetés készítésénél alapértelmezett adatok beállítása', true);
+        createCheckbox(altalanos, 'Jelleg:', true);        
+        createDropdown(altalanos, 'Jelleg dropdown', ['Új', 'Felújítás'], 'Felújítás', 'Jelleg:');
+        createCheckbox(altalanos, 'Építmény tulajdonsága:', true);
+        let építményekTulList = ['Egylakásos lakóépület', 'Két és többlakásos lakóépület', 'Közösségi lakóépület', 'Szálloda', 'Hivatali épület', 'Nagy- és kiskereskedelmi épület', 'Közlekedési és hírközlési épület', 'Ipari épület, raktár', 'Szórakoztató célú épület', 'Közművelődési célú épület', 'Oktatási célú épület', 'Egészségügyi célú épület', 'Egyéb nem lakóépület', 'Út', 'Vasút', 'Komplex ipari létesítmény', 'Sport és üdülési célú építmény', 'Egyéb építmény'];
+        createDropdown(altalanos, 'Építmény tulajdonsága dropdown', építményekTulList, 'Hivatali épület', 'Építmény tulajdonsága:');
+        createCheckbox(altalanos, 'Rezsióradíj:', false);
+        createNumberInput(altalanos, 'Rezsioradij input', '0', 'Rezsióradíj:');
+
 
         // const content2 = createContentDiv('content2');
         // createCheckbox(content2, 'Option A');
@@ -145,10 +158,11 @@
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.id = generateCheckboxID(container.id, label);
+            //checkbox.style.marginLeft = '0px';
             const labelElement = document.createElement('label');
             labelElement.textContent = label;
             labelElement.htmlFor = checkbox.id;
-            labelElement.style.padding = "5px 10px 5px 5px";
+            labelElement.style.padding = "5px 5px 5px 5px";
             labelElement.style.marginTop = "10px";
             const spacing = document.createElement('div');
             spacing.style.margin = 0;
@@ -197,6 +211,148 @@
                 const checkbox = document.getElementById(checkboxID);
                 if (checkbox) {
                     checkbox.checked = state[checkboxID];
+                }
+            }
+        }
+
+        function createDropdown(container, label, options, defaultValue, checkboxLabel) {
+            // Create the dropdown element
+            const dropdown = document.createElement('select');
+            dropdown.id = generateDropdownID(container.id, label);
+        
+            // Create and append options to the dropdown
+            options.forEach(optionText => {
+                const option = document.createElement('option');
+                option.value = optionText;
+                option.textContent = optionText;
+                dropdown.appendChild(option);
+            });
+        
+            // Check if user state is available, otherwise use default
+            const selectedValue = userDropdownState[dropdown.id] !== undefined ? userDropdownState[dropdown.id] : defaultValue;
+        
+            // Set the selected value for the dropdown
+            dropdown.value = selectedValue;
+        
+            // Save default value
+            defaultDropdownState[dropdown.id] = defaultValue;
+        
+            // Add change event listener to save user state
+            dropdown.addEventListener('change', function() {
+                userDropdownState[dropdown.id] = dropdown.value;
+                saveDropdownState('user_dropdownState', userDropdownState);
+            });
+        
+            // Find the checkbox label element
+            const checkboxLabelElement = findCheckboxLabelElement(container, checkboxLabel);
+        
+            if (checkboxLabelElement) {
+                // Append the dropdown immediately after the checkbox label
+                checkboxLabelElement.parentNode.insertBefore(dropdown, checkboxLabelElement.nextSibling);
+            } else {
+                // If checkbox label is not found, simply append the dropdown to the container
+                container.appendChild(dropdown);
+            }
+        }
+        
+        // Function to find a checkbox label element based on its text content within a container
+        function findCheckboxLabelElement(container, checkboxLabel) {
+            const labels = container.querySelectorAll('label');
+            for (const label of labels) {
+                if (label.textContent.trim() === checkboxLabel.trim()) {
+                    return label;
+                }
+            }
+            return null;
+        }
+
+        // Function to generate dropdown ID based on container ID and label
+        function generateDropdownID(containerID, label) {
+            const sanitizedLabel = label.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase();
+            return `${containerID}-${sanitizedLabel}`;
+        }
+        
+        // Function to load dropdown state from local storage
+        function loadDropdownState(key) {
+            const storedState = localStorage.getItem(key);
+            return storedState ? JSON.parse(storedState) : {};
+        }
+        
+        // Function to save dropdown state to local storage
+        function saveDropdownState(key, state) {
+            localStorage.setItem(key, JSON.stringify(state));
+        }
+        
+        // Function to apply dropdown state to dropdowns
+        function applyDropdownState(state) {
+            for (const dropdownID in state) {
+                const dropdown = document.getElementById(dropdownID);
+                if (dropdown) {
+                    dropdown.value = state[dropdownID];
+                }
+            }
+        }
+
+        function createNumberInput(container, label, defaultValue, checkboxLabel) {
+            // Create the number input element
+            const numberInput = document.createElement('input');
+            numberInput.type = 'text';
+            numberInput.pattern = '\\d*'; // Allow only numbers
+            numberInput.id = generateInputID(container.id, label);
+            numberInput.style.textAlign = 'right';
+            numberInput.style.width = '80px';
+            numberInput.style.paddingTop = '2px';
+        
+            // Check if user state is available, otherwise use default
+            const inputValue = userInputState[numberInput.id] !== undefined ? userInputState[numberInput.id] : defaultValue;
+        
+            // Set the input value
+            numberInput.value = inputValue;
+        
+            // Save default value
+            defaultUserInputState[numberInput.id] = defaultValue;
+        
+            // Add input event listener to save user state
+            numberInput.addEventListener('input', function() {
+                userInputState[numberInput.id] = numberInput.value;
+                saveUserInputState('user_inputState', userInputState);
+            });
+        
+            // Find the checkbox label element
+            const checkboxLabelElement = findCheckboxLabelElement(container, checkboxLabel);
+        
+            if (checkboxLabelElement) {
+                // Append the number input immediately after the checkbox label
+                checkboxLabelElement.parentNode.insertBefore(numberInput, checkboxLabelElement.nextSibling);
+            } else {
+                // If checkbox label is not found, simply append the number input to the container
+                container.appendChild(numberInput);
+            }
+        }
+        
+        // Function to generate input ID based on container ID and label
+        function generateInputID(containerID, label) {
+            const sanitizedLabel = label.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-').toLowerCase();
+            return `${containerID}-${sanitizedLabel}-input`;
+        }
+        
+        // Function to load user input state from local storage
+        function loadUserInputState(key) {
+            const storedState = localStorage.getItem(key);
+            return storedState ? JSON.parse(storedState) : {};
+        }
+        
+        // Function to save user input state to local storage
+        function saveUserInputState(key, state) {
+            localStorage.setItem(key, JSON.stringify(state));
+        }
+        
+        // Function to apply user input state to inputs
+        function applyUserInputState(state) {
+            for (const inputID in state) {
+                const input = document.getElementById(inputID);
+                if (input) {
+                    input.value = state[inputID];
                 }
             }
         }
@@ -535,7 +691,7 @@
             } else if (!massExportCheckbox.checked){
                 massExportButton.style.display = 'none';
             }
-            mx++           
+            mx++;
         }
 
         massExportCheckbox.addEventListener('change', function() {
@@ -546,7 +702,107 @@
             }
         });
 
+        /*<---------------------------------------- NEW BUDGET ESTIMATES AUTOFILL -------------------------------------------------------------------------------------->*/
 
+        document.querySelector('#altalanos-jelleg').style.marginLeft = document.querySelector('#altalanos-ptmny-tulajdonsga').style.marginLeft = document.querySelector('#altalanos-rezsiradj').style.marginLeft = '40px';
+        document.querySelector('#altalanos > label:nth-child(18)').style.marginRight = document.querySelector('#altalanos > label:nth-child(23)').style.marginRight = document.querySelector('#altalanos > label:nth-child(28)').style.marginRight = '5px';
+
+
+        // Mutation observer
+        function setupDOMObserver(targetClass, targetTextContent, callbackFunctions) {
+            // Define the target node to observe
+            const targetNode = document.body;
+        
+            // Options for the observer (specify which mutations to observe)
+            const config = { attributes: true, childList: true, subtree: true, passive: true };
+        
+            // Callback function to execute when mutations are observed
+            const callback = function(mutationsList, observer) {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                        // Check for specific changes based on text content and class
+                        const addedNode = mutation.addedNodes[0];
+            
+                        if (
+                            addedNode.nodeType === 3 &&
+                            addedNode.nodeValue.trim() === targetTextContent &&
+                            (addedNode.parentElement && addedNode.parentElement.classList && addedNode.parentElement.classList.contains(targetClass))
+                        ) {
+                            // // Trigger each callback function with a delay
+                            // callbackFunctions.forEach((func, index) => {
+                            //     setTimeout(() => func(addedNode.parentElement), (index + 1) * 3000); // Adjust the delay (in milliseconds) between function calls
+                            // });
+                            callbackFunctions(addedNode.parentElement);
+                        }
+                    }
+                }
+            };
+        
+            // Create an observer instance linked to the callback function
+            var observer = new MutationObserver(callback);
+        
+            // Start observing the target node for configured mutations
+            var newKoltsChex = document.querySelector("#altalanos-j-kltsgvets-ksztsnl-alaprtelmezett-adatok-belltsa");
+            if (newKoltsChex.checked) {
+                observer.observe(targetNode, config);    
+            }
+            newKoltsChex.addEventListener('change', function(){
+                if (newKoltsChex.checked) {
+                    observer.observe(targetNode, config);
+                } else {
+                    observer.disconnect();
+                }
+            })
+        }
+        
+        var jelleg = function(elem) {
+            // alert(elem.classList);
+            var ujKoltsegAblak = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
+            
+            if (document.querySelector("#altalanos-jelleg").checked) {
+                var jellegUserValue = document.querySelector('#altalanos-jelleg-dropdown').value.toString();
+                var jellegDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[6].children[1].children[0].children[1];
+                if (jellegDropdown.value != jellegUserValue) {
+                    jellegDropdown.addEventListener('click', function() {
+                        document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
+                            if(element.innerHTML == jellegUserValue){
+                                element.click();
+                            }
+                        });
+                    }, {once: true}, {passive: true});
+                    jellegDropdown.click();
+                }                
+            }
+            if (document.querySelector("#altalanos-ptmny-tulajdonsga").checked) {
+                var epitmenyUserValue = document.querySelector("#altalanos-ptmny-tulajdonsga-dropdown").value.toString();
+                var epitmenyDropdown = ujKoltsegAblak.children[1].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[7].children[1].children[0].children[1];
+                if (epitmenyDropdown.value != epitmenyUserValue) {
+                    epitmenyDropdown.addEventListener('click', function() {setTimeout(()=>{
+                            document.querySelectorAll("body > div:nth-last-child(1) > div:nth-child(1) > div").forEach((element)=>{
+                                if(element.innerHTML == epitmenyUserValue){
+                                    element.click();
+                                }
+                            });
+                        }, 300);
+                    }, {once: true}, {passive: true});
+                    setTimeout(epitmenyDropdown.click(), 100);
+                }
+            }
+
+            if (document.querySelector("#altalanos-rezsiradj").checked) {
+                var rezsioraUserInput = document.querySelector("#altalanos-rezsioradij-input-input").value;
+                if (rezsioraUserInput.length > 0) {
+                    var rezsioraUserNumber = Number(document.querySelector("#altalanos-rezsioradij-input-input").value);
+                    document.querySelector("input[name=lessonfee]").value=rezsioraUserNumber;
+                }
+            }
+        };
+        var newKoltsChex = document.querySelector("#altalanos-j-kltsgvets-ksztsnl-alaprtelmezett-adatok-belltsa");
+        if (newKoltsChex.checked) {
+            setupDOMObserver('x-window-header-text', 'Új költségvetés létrehozása', jelleg);    
+        }
+
+                
         /*<---------------------------------------- FRESH PAGE -------------------------------------------------------------------------------------->*/
 
         var currentPage = "";
@@ -582,7 +838,7 @@
 
                 buttonRearrangement();
 
-                let leftPanelTetelekCsoportositasa = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)');
+                //let leftPanelTetelekCsoportositasa = jQuery('#maindiv > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)');
 
 
                 if ((tetelekCsoportositasaCheckbox.checked) && !(jQuery('#ext-comp-1077 > b:nth-child(1)').is(':visible'))){
